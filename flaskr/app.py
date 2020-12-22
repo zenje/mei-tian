@@ -7,7 +7,7 @@ app = Flask(__name__, instance_relative_config=True)
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 app.config.from_mapping(
-    SQLALCHEMY_DATABASE_URI='sqlite:///' + os.path.join(basedir, 'db.sqlite'),
+    SQLALCHEMY_DATABASE_URI='sqlite:///' + os.path.join(basedir, 'db.sqlite3'),
     SQLALCHEMY_TRACK_MODIFICATIONS=False,
 )
 
