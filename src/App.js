@@ -3,21 +3,18 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
-  const [currentTime, setCurrentTime] = useState(0);
-
+  const [randomWord, setRandomWord] = useState(0);
+  
   useEffect(() => {
-    fetch('/time').then(res => res.json()).then(data => {
-      setCurrentTime(data.time);
+    fetch('/chinese').then(res => res.json()).then(data => {
+      setRandomWord(data.word);
     });
   }, []);
 
   return (
     <div className="App">
       <header className="App-header">
-
-        ... no changes in this part ...
-
-        <p>The current time is {currentTime}.</p>
+        <p>A random word of the day: {randomWord}.</p>
       </header>
     </div>
   );
