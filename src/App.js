@@ -1,20 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import "./App.css";
 
 function App() {
-  const [randomWord, setRandomWord] = useState(0);
-  
+  const [randomWord, setRandomWord] = useState("...loading");
+  const [category, setCategory] = useState("");
+
   useEffect(() => {
-    fetch('/chinese').then(res => res.json()).then(data => {
-      setRandomWord(data.word);
-    });
+    fetch("/randomWord")
+      .then((res) => res.json())
+      .then((data) => {
+        setRandomWord(data.word);
+        setCategory(data.category);
+      });
   }, []);
 
   return (
     <div className="App">
       <header className="App-header">
-        <p>A random word of the day: {randomWord}.</p>
+        <h2>a random word of the day:</h2>
+        <div>{randomWord}</div>
+        <br />
+        {category && <div>[ {category} ]</div>}
       </header>
     </div>
   );

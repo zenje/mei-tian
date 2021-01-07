@@ -7,3 +7,8 @@ SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 # basedir = os.path.abspath(os.path.dirname(__file__))
 # SQLALCHEMY_DATABASE_URI='sqlite:///' + os.path.join(basedir, 'db.sqlite3')
+
+DEBUG = True  # some Flask specific configs
+CACHE_TYPE = "filesystem"  # Flask-Caching related configs
+CACHE_DIR = "/tmp"
+CACHE_DEFAULT_TIMEOUT = 300

@@ -1,38 +1,24 @@
 from flask import Blueprint
-import time
+from .dictionary import get_dictionary, get_hsk3
 
-from chinese_english_lookup import Dictionary, HSK3
-
-test = Blueprint("short", __name__)
-
-dictionary = Dictionary()
-hsk3 = HSK3(dictionary)
+words = Blueprint("words", __name__)
 
 
-@test.route("/hello")
-def hello():
-    return "Hello, World!"
-
-
-@test.route("/time")
-def get_current_time():
-    return {"time": time.time()}
-
-
-def get_random():
-    return dictionary.random_entry()
+def random_entry():
+    return get_dictionary().random_entry()
 
 
 def get_random_in_hsk():
-    hsk_category = None
-    while hsk_category is None:
-        random = get_random()
-        random_simp = random.simp
-        hsk_category = hsk3.get_category_for_word(random_simp)
-        print(random_simp + " " + str(hsk_category))
+    random = type("", (), {})()
+    random.category = None
+    while random.category is None:
+        random = random_entry()
+        random.category = get_hsk3().get_category_for_word(random.simp)
+        print(random.simp + " " + str(random.category))
     return random
 
 
-@test.route("/chinese")
-def chinese():
-    return {"word": str(get_random_in_hsk())}
+@words.route("/randomWord")
+def get_random_word():
+    word = get_random_in_hsk()
+    return {"word": str(word), "category": word.category}

@@ -1,7 +1,7 @@
 from flask import Flask
 
 from .extensions import db
-from .routes import test
+from .routes import words
 
 
 def create_app(config_file="settings.py"):
@@ -11,6 +11,6 @@ def create_app(config_file="settings.py"):
 
     db.init_app(app)
 
-    app.register_blueprint(test)
+    app.register_blueprint(words)
 
     return app

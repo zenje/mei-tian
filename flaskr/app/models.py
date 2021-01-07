@@ -1,5 +1,5 @@
 from datetime import date
-from app import db, ma
+from .extensions import db
 
 
 class WordOfTheDay(db.Model):
