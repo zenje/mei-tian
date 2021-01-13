@@ -15,6 +15,10 @@ def create_app(config_file = "settings.py"):
     @app.route('/')
     def index():
         return app.send_static_file('index.html')
+        
+    @app.route('/randomWord')
+    def r():
+        return {"word": "word!", "category": "category!"}
 
     return app
     
