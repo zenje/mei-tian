@@ -16,7 +16,7 @@ def create_app(config_file = "settings.py"):
     def index():
         return app.send_static_file('index.html')
         
-    @app.route('/randomWord')
+    @app.route('/api/randomWord', methods=['GET'])
     def r():
         return {"word": "word!", "category": "category!"}
 

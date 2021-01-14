@@ -6,7 +6,7 @@ function App() {
   const [category, setCategory] = useState("");
 
   useEffect(() => {
-    fetch("/randomWord")
+    fetch("/api/randomWord")
       .then((res) => res.json())
       .then((data) => {
         setRandomWord(data.word);
