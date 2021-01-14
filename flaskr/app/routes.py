@@ -18,7 +18,7 @@ def get_random_in_hsk():
     return random
 
 
-@words.route("/randomWord")
+@words.route("/api/randomWord")
 def get_random_word():
     word = get_random_in_hsk()
     return {"word": str(word), "category": word.category}
