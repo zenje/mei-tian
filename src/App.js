@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
+import RefreshIcon from "@material-ui/icons/Refresh";
 
 const getSentences = (sentences, word) => {
   if (!sentences || !sentences.length || !word) {
@@ -42,6 +43,14 @@ export default function App() {
     setWordData(data);
     setIsLoading(false);
   };
+
+  const refreshHandler = () => {
+    setIsLoading(true);
+    fetch("/api/randomWord")
+      .then((res) => res.json())
+      .then(handleData);
+  };
+
   useEffect(() => {
     fetch("/api/randomWord")
       .then((res) => res.json())
@@ -63,6 +72,12 @@ export default function App() {
     <div className="App">
       <header className="App-header">
         <h2>a random word of the day:</h2>
+        <RefreshIcon
+          onClick={() => refreshHandler()}
+          fontSize="large"
+          style={{ fill: "white" }}
+        />
+        <br />
         <div>{`${wordData.word.simp} | ${wordData.word.trad}`}</div>
         <div>{wordData.definitions}</div>
         <br />
