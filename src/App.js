@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 
 const getSentences = (sentences, word) => {
-  if (!sentences || sentences.length == 0 || !word) {
+  if (!sentences || !sentences.length || !word) {
     return;
   }
 
@@ -48,7 +48,7 @@ export default function App() {
       .then(handleData);
   }, []);
 
-  if (isLoading || data) {
+  if (isLoading || !wordData) {
     return (
       <div className="App">
         <header className="App-header">
@@ -63,12 +63,12 @@ export default function App() {
     <div className="App">
       <header className="App-header">
         <h2>a random word of the day:</h2>
-        <div>{`${data.word.simp} | ${data.word.trad}`}</div>
-        <div>{data.definitions}</div>
+        <div>{`${wordData.word.simp} | ${wordData.word.trad}`}</div>
+        <div>{wordData.definitions}</div>
         <br />
-        {data.category && <div>[ {data.category} ]</div>}
+        {wordData.category && <div>[ {wordData.category} ]</div>}
         <br />
-        {getSentences(data.sentences, data.word.simp)}
+        {getSentences(wordData.sentences, wordData.word.simp)}
       </header>
     </div>
   );
