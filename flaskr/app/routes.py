@@ -1,5 +1,9 @@
-from flask import Blueprint
+from flask import Blueprint, jsonify
 from .dictionary import get_dictionary, get_hsk3
+
+import json
+import requests
+from bs4 import BeautifulSoup
 
 words = Blueprint("words", __name__)
 
@@ -18,7 +22,31 @@ def get_random_in_hsk():
     return random
 
 
+def get_sentences(word):
+    URL = "http://www.jukuu.com/search.php?q=%s" % word
+    page = requests.get(URL)
+    soup = BeautifulSoup(page.content, "html.parser")
+
+    sentences = []
+    sentence = None
+    for element in soup.find_all("tr", class_=["c", "e"]):
+        if element["class"][0] == "e":
+            sentence = {}
+            sentence["english"] = element.get_text().strip()
+        else:
+            sentence["chinese"] = element.get_text().strip()
+            sentences.append(sentence)
+
+    return sentences
+
+
 @words.route("/api/randomWord")
 def get_random_word():
     word = get_random_in_hsk()
-    return {"word": str(word), "category": word.category}
+    result = {
+        "word": word,
+        "definitions": word.get_definition_entries_formatted(),
+        "category": word.category,
+        "sentences": get_sentences(word.simp),
+    }
+    return json.dumps(result, default=lambda o: o.__dict__)
