@@ -1,11 +1,13 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint
 from .dictionary import get_dictionary, get_hsk3
 
 import json
 import requests
 from bs4 import BeautifulSoup
+from xpinyin import Pinyin
 
 words = Blueprint("words", __name__)
+p = Pinyin()
 
 
 def random_entry():
@@ -30,14 +32,20 @@ def get_sentences(word):
     sentences = []
     sentence = None
     for element in soup.find_all("tr", class_=["c", "e"]):
+        text = element.get_text().strip()
         if element["class"][0] == "e":
             sentence = {}
-            sentence["english"] = element.get_text().strip()
+            sentence["english"] = text
         else:
-            sentence["chinese"] = element.get_text().strip()
+            sentence["chinese"] = text
+            sentence["pinyin"] = get_pinyin(text)
             sentences.append(sentence)
 
     return sentences
+
+
+def get_pinyin(chinese_text):
+    return p.get_pinyin(chinese_text, tone_marks="marks", splitter=" ")
 
 
 @words.route("/api/randomWord")

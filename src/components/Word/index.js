@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "./App.css";
 import RefreshIcon from "@material-ui/icons/Refresh";
 
 const getSentences = (sentences, word) => {
@@ -14,6 +13,8 @@ const getSentences = (sentences, word) => {
           {item.english}
           <br />
           {boldWordInSentence(item.chinese, word)}
+          <br />
+          {item.pinyin}
         </p>
       ))}
     </div>
@@ -34,7 +35,7 @@ const boldWordInSentence = (sentence, word) => {
   return sentence;
 };
 
-export default function App() {
+export default function Word() {
   const [isLoading, setIsLoading] = useState(true);
   const [wordData, setWordData] = useState(null);
 
@@ -59,32 +60,28 @@ export default function App() {
 
   if (isLoading || !wordData) {
     return (
-      <div className="App">
-        <header className="App-header">
-          <h2>a random word of the day:</h2>
-          <div>...loading</div>
-        </header>
-      </div>
+      <header className="App-header">
+        <h2>a random word of the day:</h2>
+        <div>...loading</div>
+      </header>
     );
   }
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <h2>a random word of the day:</h2>
-        <RefreshIcon
-          onClick={() => refreshHandler()}
-          fontSize="large"
-          style={{ fill: "white" }}
-        />
-        <br />
-        <div>{`${wordData.word.simp} | ${wordData.word.trad}`}</div>
-        <div>{wordData.definitions}</div>
-        <br />
-        {wordData.category && <div>[ {wordData.category} ]</div>}
-        <br />
-        {getSentences(wordData.sentences, wordData.word.simp)}
-      </header>
-    </div>
+    <header className="App-header">
+      <h2>a random word of the day:</h2>
+      <RefreshIcon
+        onClick={() => refreshHandler()}
+        fontSize="large"
+        style={{ fill: "white" }}
+      />
+      <br />
+      <div>{`${wordData.word.simp} | ${wordData.word.trad}`}</div>
+      <div>{wordData.definitions}</div>
+      <br />
+      {wordData.category && <div>[ {wordData.category} ]</div>}
+      <br />
+      {getSentences(wordData.sentences, wordData.word.simp)}
+    </header>
   );
 }
