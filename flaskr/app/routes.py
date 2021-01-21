@@ -49,7 +49,7 @@ def get_pinyin(chinese_text):
 
 
 @words.route("/api/randomWord")
-def get_random_word():
+def fetch_random_word():
     word = get_random_in_hsk()
     result = {
         "word": word,
@@ -57,4 +57,14 @@ def get_random_word():
         "category": word.category,
         "sentences": get_sentences(word.simp),
     }
+    return json.dumps(result, default=lambda o: o.__dict__)
+
+
+@words.route("/api/hsk3")
+def fetch_hsk3():
+    hsk3 = get_hsk3()
+    entry_words = hsk3.get_entry()
+    # for word in hsk3.get_entry():
+    #    entry_words.append(word.simp)
+    result = {"entry": entry_words}
     return json.dumps(result, default=lambda o: o.__dict__)
