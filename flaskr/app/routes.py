@@ -66,5 +66,10 @@ def fetch_hsk3():
     entry_words = hsk3.get_entry()
     # for word in hsk3.get_entry():
     #    entry_words.append(word.simp)
-    result = {"entry": entry_words}
+    result = {
+        "entry": hsk3.get_entry(),
+        "intermediate": hsk3.get_intermediate(),
+        "advanced": hsk3.get_advanced(),
+        "supplemental": hsk3.get_supplemental(),
+    }
     return json.dumps(result, default=lambda o: o.__dict__)
