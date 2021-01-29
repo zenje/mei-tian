@@ -1,6 +1,6 @@
 from flask import Flask
 
-from .extensions import db
+from .extensions import db, ma
 from .routes import words
 
 
@@ -10,6 +10,7 @@ def create_app(config_file="settings.py"):
     app.config.from_pyfile(config_file)
 
     db.init_app(app)
+    ma.init_app(app)
 
     app.register_blueprint(words)
 

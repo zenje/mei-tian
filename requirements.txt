@@ -1,5 +1,5 @@
 beautifulsoup4==4.9.1
-chinese-english-lookup==0.0.2
+chinese-english-lookup==0.0.3
 Flask==1.1.2
 flask-marshmallow==0.14.0
 Flask-Script==2.0.6
