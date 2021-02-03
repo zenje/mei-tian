@@ -3,6 +3,7 @@ import { Switch, Route } from "react-router-dom";
 import RandomWord from "components/RandomWord";
 import Word from "components/Word";
 import WordGrid from "components/WordGrid";
+import { useParams } from "react-router-dom";
 
 export default function Routes() {
   return (
@@ -17,8 +18,13 @@ export default function Routes() {
         <h2>HSK3</h2>
       </Route>
       <Route path="/word/:word">
-        <Word />
+        <WordWithParams />
       </Route>
     </Switch>
   );
 }
+
+const WordWithParams = () => {
+  const { word } = useParams();
+  return <Word word={word} isLoading={true} />;
+};

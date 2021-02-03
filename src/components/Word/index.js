@@ -47,11 +47,10 @@ const formatDefinitions = (entries) => {
   );
 };
 
-export default function Word() {
-  const { word } = useParams();
-  console.log("word", word);
-  const [isLoading, setIsLoading] = useState(true);
-  const [wordData, setWordData] = useState(null);
+export default function Word(props) {
+  const { word, wordDataProp } = props;
+  const [isLoading, setIsLoading] = useState(props.isLoading);
+  const [wordData, setWordData] = useState(wordDataProp);
 
   const handleData = (data) => {
     console.log("data", data);
@@ -63,10 +62,7 @@ export default function Word() {
     if (word) {
       setIsLoading(true);
       fetch("/api/word/" + word)
-        .then((res) => {
-          console.log("res", res);
-          return res.json();
-        })
+        .then((res) => res.json())
         .then((data) => {
           console.log("word " + word, data);
           handleData(data);
@@ -76,10 +72,10 @@ export default function Word() {
 
   if (isLoading || !wordData) {
     return (
-      <header className="App-header">
+      <>
         {word && <h2>{word}</h2>}
         <div>...loading</div>
-      </header>
+      </>
     );
   }
 

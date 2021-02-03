@@ -51,6 +51,24 @@ def get_pinyin(chinese_text):
 @words.route("/api/word/<word>")
 def fetch_word(word):
     word_entry = get_dictionary().lookup(word)
+    return format_word_entry(word_entry)
+
+
+@words.route("/api/randomWord")
+def fetch_random_word():
+    word_entry = get_random_in_hsk()
+    return format_word_entry(word_entry)
+    # result = {}
+    # result["word"] = {
+    #     "word": word,
+    #     "definitions": word.get_definition_entries_formatted(),
+    #     "category": word.category,
+    #     "sentences": get_sentences(word.simp),
+    # }
+    # return json.dumps(result, default=lambda o: o.__dict__)
+    
+
+def format_word_entry(word_entry):
     word_simp = word_entry.simp
     word_entry.sentences = get_sentences(word_simp)
     word_entry.hsk2 = get_hsk2().get_level_for_word(word_simp)
@@ -59,19 +77,6 @@ def fetch_word(word):
     result = {}
     result["word"] = word_entry
 
-    return json.dumps(result, default=lambda o: o.__dict__)
-
-
-@words.route("/api/randomWord")
-def fetch_random_word():
-    word = get_random_in_hsk()
-    result = {}
-    result["word"] = {
-        "word": word,
-        "definitions": word.get_definition_entries_formatted(),
-        "category": word.category,
-        "sentences": get_sentences(word.simp),
-    }
     return json.dumps(result, default=lambda o: o.__dict__)
 
 
