@@ -13,6 +13,8 @@ export default function App() {
         <Navigation />
         <header className="App-header">
           <div>
+            <br />
+            <br />
             <Routes />
           </div>
         </header>

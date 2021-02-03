@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import RefreshIcon from "@material-ui/icons/Refresh";
 import { useParams } from "react-router-dom";
 
 const getSentences = (sentences, word) => {
@@ -35,21 +36,7 @@ const boldWordInSentence = (sentence, word) => {
   return sentence;
 };
 
-const formatDefinitions = (entries) => {
-  return (
-    <ul>
-      {entries.map((entry) => (
-        <li>
-          [{entry.pinyin}] {entry.definitions.join(", ")}
-        </li>
-      ))}
-    </ul>
-  );
-};
-
 export default function Word() {
-  const { word } = useParams();
-  console.log("word", word);
   const [isLoading, setIsLoading] = useState(true);
   const [wordData, setWordData] = useState(null);
 
@@ -59,25 +46,23 @@ export default function Word() {
     setIsLoading(false);
   };
 
+  const refreshHandler = () => {
+    setIsLoading(true);
+    fetch("/api/randomWord")
+      .then((res) => res.json())
+      .then(handleData);
+  };
+
   useEffect(() => {
-    if (word) {
-      setIsLoading(true);
-      fetch("/api/word/" + word)
-        .then((res) => {
-          console.log("res", res);
-          return res.json();
-        })
-        .then((data) => {
-          console.log("word " + word, data);
-          handleData(data);
-        });
-    }
-  }, [word]);
+    fetch("/api/randomWord")
+      .then((res) => res.json())
+      .then(handleData);
+  }, []);
 
   if (isLoading || !wordData) {
     return (
       <header className="App-header">
-        {word && <h2>{word}</h2>}
+        <h2>a random word of the day:</h2>
         <div>...loading</div>
       </header>
     );
@@ -85,14 +70,19 @@ export default function Word() {
 
   return (
     <>
-      <h2>
-        {wordData.simp} | {wordData.trad}
-      </h2>
-      <div>{formatDefinitions(wordData.definition_entries)}</div>
-      {wordData.hsk2 && <div>HSK2 - [ Level {wordData.hsk2} ]</div>}
-      {wordData.hsk3 && <div>HSK3 - [ {wordData.hsk3} ]</div>}
-      <div>-</div>
-      {getSentences(wordData.sentences, wordData.simp)}
+      <h2>a random word of the day:</h2>
+      <RefreshIcon
+        onClick={() => refreshHandler()}
+        fontSize="large"
+        style={{ fill: "white" }}
+      />
+      <br />
+      <div>{`${wordData.word.simp} | ${wordData.word.trad}`}</div>
+      <div>{wordData.definitions}</div>
+      <br />
+      {wordData.category && <div>[ {wordData.category} ]</div>}
+      <br />
+      {getSentences(wordData.sentences, wordData.word.simp)}
     </>
   );
 }

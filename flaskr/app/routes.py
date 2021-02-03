@@ -1,5 +1,5 @@
 from flask import Blueprint
-from .dictionary import get_dictionary, get_hsk3
+from .dictionary import get_dictionary, get_hsk2, get_hsk3
 
 import json
 import requests
@@ -48,10 +48,25 @@ def get_pinyin(chinese_text):
     return p.get_pinyin(chinese_text, tone_marks="marks", splitter=" ")
 
 
+@words.route("/api/word/<word>")
+def fetch_word(word):
+    word_entry = get_dictionary().lookup(word)
+    word_simp = word_entry.simp
+    word_entry.sentences = get_sentences(word_simp)
+    word_entry.hsk2 = get_hsk2().get_level_for_word(word_simp)
+    word_entry.hsk3 = get_hsk3().get_category_for_word(word_simp)
+
+    result = {}
+    result["word"] = word_entry
+
+    return json.dumps(result, default=lambda o: o.__dict__)
+
+
 @words.route("/api/randomWord")
 def fetch_random_word():
     word = get_random_in_hsk()
-    result = {
+    result = {}
+    result["word"] = {
         "word": word,
         "definitions": word.get_definition_entries_formatted(),
         "category": word.category,

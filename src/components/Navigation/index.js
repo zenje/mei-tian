@@ -15,7 +15,9 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
-import { Link } from "react-router-dom";
+import InputBase from "@material-ui/core/InputBase";
+import SearchIcon from "@material-ui/icons/Search";
+import { Link, useHistory } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -85,6 +87,7 @@ export default function Navigation() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
+  let history = useHistory();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -114,7 +117,29 @@ export default function Navigation() {
           >
             <MenuIcon />
           </IconButton>
-          <h1>Mini variant drawer</h1>
+          <h1>mei-tian</h1>
+          <div>
+            <div>
+              <SearchIcon />
+            </div>
+            <InputBase
+              placeholder="Search…"
+              type="search"
+              onChange={(event) => {
+                console.log("event", event);
+                console.log("event " + event.target.value);
+              }}
+              onKeyDown={(event) => {
+                console.log("event.keyCode", event.keyCode);
+                if (event.keyCode === 13) {
+                  console.log("event onkeydown", event);
+                  console.log("event onkeydown " + event.target.value);
+                  const value = event.target.value;
+                  history.push("/word/" + value);
+                }
+              }}
+            />
+          </div>
         </Toolbar>
       </AppBar>
       <Drawer
