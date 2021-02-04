@@ -5,6 +5,19 @@ import Routes from "components/Routes";
 import { BrowserRouter as Router } from "react-router-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
+import styled from "styled-components";
+
+export const Main = styled.div`
+  flex-grow: 1;
+  padding: 1rem;
+`;
+export const ToolbarSpacing = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-height: 2rem;
+`;
+
 export default function App() {
   return (
     <div className="App">
@@ -12,11 +25,10 @@ export default function App() {
         <CssBaseline />
         <Navigation />
         <header className="App-header">
-          <div>
-            <br />
-            <br />
+          <Main>
+            <ToolbarSpacing />
             <Routes />
-          </div>
+          </Main>
         </header>
       </Router>
     </div>

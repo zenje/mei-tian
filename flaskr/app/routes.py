@@ -66,7 +66,7 @@ def fetch_random_word():
     #     "sentences": get_sentences(word.simp),
     # }
     # return json.dumps(result, default=lambda o: o.__dict__)
-    
+
 
 def format_word_entry(word_entry):
     word_simp = word_entry.simp

@@ -17,7 +17,14 @@ import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import InputBase from "@material-ui/core/InputBase";
 import SearchIcon from "@material-ui/icons/Search";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+
+import {
+  StyledLink as Link,
+  StyledSearchBar,
+  StyledSearchIcon,
+  StyledInput as Input,
+} from "./style";
 
 const drawerWidth = 240;
 
@@ -117,12 +124,14 @@ export default function Navigation() {
           >
             <MenuIcon />
           </IconButton>
-          <h1>mei-tian</h1>
-          <div>
-            <div>
+          <Link to="/">
+            <h1>mei-tian</h1>
+          </Link>
+          <StyledSearchBar>
+            <StyledSearchIcon>
               <SearchIcon />
-            </div>
-            <InputBase
+            </StyledSearchIcon>
+            <Input
               placeholder="Search…"
               type="search"
               onChange={(event) => {
@@ -139,7 +148,7 @@ export default function Navigation() {
                 }
               }}
             />
-          </div>
+          </StyledSearchBar>
         </Toolbar>
       </AppBar>
       <Drawer
