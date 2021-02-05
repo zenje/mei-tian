@@ -80,16 +80,27 @@ def format_word_entry(word_entry):
     return json.dumps(result, default=lambda o: o.__dict__)
 
 
-@words.route("/api/hsk3")
-def fetch_hsk3():
+@words.route("/api/hsk2/<level>")
+def fetch_hsk2(level):
+    hsk2 = get_hsk2()
+    return json.dumps(
+        hsk2.get_words_for_level(int(level)), default=lambda o: o.__dict__
+    )
+
+
+@words.route("/api/hsk3/<category>")
+def fetch_hsk3(category):
     hsk3 = get_hsk3()
-    entry_words = hsk3.get_entry()
-    # for word in hsk3.get_entry():
-    #    entry_words.append(word.simp)
-    result = {
-        "entry": hsk3.get_entry(),
-        "intermediate": hsk3.get_intermediate(),
-        "advanced": hsk3.get_advanced(),
-        "supplemental": hsk3.get_supplemental(),
-    }
+    category = category.lower()
+    result = None
+
+    if category == "entry":
+        result = hsk3.get_entry()
+    elif category == "intermediate":
+        result = hsk3.get_intermediate()
+    elif category == "advanced":
+        result = hsk3.get_advanced()
+    else:
+        result == hsk3.get_supplemental()
+
     return json.dumps(result, default=lambda o: o.__dict__)
