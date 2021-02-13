@@ -1,36 +1,21 @@
 import React, { useState } from "react";
-import "./style.css";
 import Navigation from "components/Navigation";
 import Routes from "components/Routes";
+import { Container, Main, ToolbarSpacing } from "./style";
 import { BrowserRouter as Router } from "react-router-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
-import styled from "styled-components";
-
-export const Main = styled.div`
-  flex-grow: 1;
-  padding: 1rem;
-`;
-export const ToolbarSpacing = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  min-height: 2rem;
-`;
-
 export default function App() {
   return (
-    <div className="App">
+    <Container>
       <Router>
         <CssBaseline />
         <Navigation />
-        <header className="App-header">
-          <Main>
-            <ToolbarSpacing />
-            <Routes />
-          </Main>
-        </header>
+        <Main>
+          <ToolbarSpacing />
+          <Routes />
+        </Main>
       </Router>
-    </div>
+    </Container>
   );
 }
