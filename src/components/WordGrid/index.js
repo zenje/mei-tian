@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
+import { StyledTabs, TabsContainer } from "./style";
 
 export default function WordGrid(props) {
   const { endpoint, levels, title } = props;
@@ -32,6 +35,7 @@ export default function WordGrid(props) {
     return (
       <>
         <h2>{title}</h2>
+        {getTabs(selectedLevel, handleTab, levels)}
         <div>...loading</div>
       </>
     );
@@ -40,24 +44,14 @@ export default function WordGrid(props) {
   return (
     <>
       <h2>{title}</h2>
-      <div>
-        <Tabs
-          value={selectedLevel}
-          onChange={handleTab}
-          indicatorColor="primary"
-          textColor="primary"
-          centered
-        >
-          {levels.map((level) => (
-            <Tab label={level} value={level} />
-          ))}
-        </Tabs>
-      </div>
+      {getTabs(selectedLevel, handleTab, levels)}
       <div>
         <Grid container spacing={3}>
           {wordData.map((word) => (
-            <Grid item xs={2}>
-              <Paper>{word.simp}</Paper>
+            <Grid item xs={4} sm={3} md={2}>
+              <Card>
+                <CardContent>{word.simp}</CardContent>
+              </Card>
             </Grid>
           ))}
         </Grid>
@@ -65,3 +59,24 @@ export default function WordGrid(props) {
     </>
   );
 }
+
+const getTabs = (selectedLevel, handleTab, levels) => {
+  const style = {
+    minWidth: "32px",
+  };
+  return (
+    <TabsContainer>
+      <StyledTabs
+        value={selectedLevel}
+        onChange={handleTab}
+        indicatorColor="primary"
+        textColor="primary"
+        centered
+      >
+        {levels.map((level) => (
+          <Tab label={level} value={level} style={style} />
+        ))}
+      </StyledTabs>
+    </TabsContainer>
+  );
+};
