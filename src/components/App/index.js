@@ -10,12 +10,17 @@ export default function App() {
     <Container>
       <Router>
         <CssBaseline />
-        <Navigation />
-        <Main>
-          <ToolbarSpacing />
-          <Routes />
-        </Main>
+        <Navigation content={<Content />} />
       </Router>
     </Container>
   );
 }
+
+const Content = () => {
+  return (
+    <Main>
+      <ToolbarSpacing />
+      <Routes />
+    </Main>
+  );
+};
