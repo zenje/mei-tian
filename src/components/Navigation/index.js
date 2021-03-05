@@ -20,18 +20,18 @@ import SearchIcon from "@material-ui/icons/Search";
 import { useHistory } from "react-router-dom";
 
 import {
+  Content,
+  MenuButtonWrapper,
+  Title,
   StyledLink as Link,
   StyledSearchBar,
   StyledSearchIcon,
   StyledInput as Input,
 } from "./style";
 
-const drawerWidth = 120;
+const drawerWidth = 150;
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-  },
   appBar: {
     transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.sharp,
@@ -45,12 +45,6 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
     }),
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  hide: {
-    display: "none",
   },
   drawer: {
     width: drawerWidth,
@@ -110,20 +104,19 @@ export default function Navigation(props) {
         })}
       >
         <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            className={clsx(classes.menuButton, {
-              [classes.hide]: open,
-            })}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Link to="/">
-            <h1>mei-tian</h1>
-          </Link>
+          <MenuButtonWrapper open={open}>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
+            >
+              <MenuIcon />
+            </IconButton>
+          </MenuButtonWrapper>
+          <Title>
+            <Link to="/">mei-tian</Link>
+          </Title>
           <StyledSearchBar>
             <StyledSearchIcon>
               <SearchIcon />
@@ -183,13 +176,7 @@ export default function Navigation(props) {
           ))}
         </List>
       </SwipeableDrawer>
-      <div
-        className={clsx(classes.content, {
-          [classes.contentShift]: open,
-        })}
-      >
-        {content}
-      </div>
+      <Content open={open}>{content}</Content>
     </>
   );
 }

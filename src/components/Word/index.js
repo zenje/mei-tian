@@ -39,9 +39,9 @@ const formatDefinitions = (entries) => {
   return (
     <ul>
       {entries.map((entry) => (
-        <li>
-          [{entry.pinyin}] {entry.definitions.join(", ")}
-        </li>
+        <div>
+          <b>[{entry.pinyin}]</b> {entry.definitions.join(", ")}
+        </div>
       ))}
     </ul>
   );
