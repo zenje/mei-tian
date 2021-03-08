@@ -54,8 +54,7 @@ export const MenuButtonWrapper = styled.div`
 
 export const Content = styled.div`
   flex-grow: 1;
-  padding-top: 24px;
-  padding-bottom: 24px;
+  padding-top: 1rem;
   margin-left: ${(props) => (!props.open ? "-150px" : "0px")};
   transition: margin 0.2s ease-out;
 `;

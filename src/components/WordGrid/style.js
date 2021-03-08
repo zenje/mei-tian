@@ -12,3 +12,8 @@ export const TabsContainer = styled.div`
 export const StyledTabs = styled(Tabs)`
   width: 100%;
 `;
+
+export const GridListButton = styled.div`
+  width: 100%;
+  text-align: right;
+`;
