@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
+
+import { store } from "store";
 
 const getSentences = (sentences, word) => {
   if (!sentences || !sentences.length || !word) {
@@ -47,10 +48,43 @@ const formatDefinitions = (entries) => {
   );
 };
 
+const renderWord = (wordData, isSimplifiedMode) => {
+  const { simp, trad } = wordData;
+  let displayedWord;
+  if (simp === trad) {
+    displayedWord = simp;
+  } else if (isSimplifiedMode) {
+    let charDifference = getCharDifference(trad, simp);
+    displayedWord = `${simp} [ ${charDifference} ]`;
+  } else {
+    let charDifference = getCharDifference(simp, trad);
+    displayedWord = `${trad} [ ${charDifference} ]`;
+  }
+  return <h2>{displayedWord}</h2>;
+};
+
+// compares characters of `word1` and `word2`, displaying `word1` characters
+// if different; otherwise, displays a '-' for characters that are the same
+const getCharDifference = (word1, word2) => {
+  let result = "";
+  for (let i = 0; i < word1.length; i++) {
+    if (word1[i] === word2[i]) {
+      result += "—";
+    } else {
+      result += word1[i];
+    }
+  }
+  return result;
+};
+
 export default function Word(props) {
   const { word, wordDataProp } = props;
   const [isLoading, setIsLoading] = useState(props.isLoading);
   const [wordData, setWordData] = useState(wordDataProp);
+
+  const context = useContext(store);
+  const { state } = context;
+  const { isSimplifiedMode } = state;
 
   const handleData = (data) => {
     console.log("data", data);
@@ -81,9 +115,7 @@ export default function Word(props) {
 
   return (
     <>
-      <h2>
-        {wordData.simp} | {wordData.trad}
-      </h2>
+      {renderWord(wordData, isSimplifiedMode)}
       <div>{formatDefinitions(wordData.definition_entries)}</div>
       {wordData.hsk2 && <div>HSK2 - [ Level {wordData.hsk2} ]</div>}
       {wordData.hsk3 && <div>HSK3 - [ {wordData.hsk3} ]</div>}

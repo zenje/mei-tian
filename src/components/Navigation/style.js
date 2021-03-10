@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import IconButton from "@material-ui/core/IconButton";
 import InputBase from "@material-ui/core/InputBase";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const Title = styled.h1`
   display: none;
+  margin: 0;
   @media (min-width: 600px) {
     display: block;
   }
@@ -22,7 +22,6 @@ export const StyledSearchBar = styled.div`
   &:hover: {
     background-color: rgba(255, 255, 255, 0.25);
   }
-  margin-right: 2rem;
   margin-left: 0;
   width: 100%;
   @media (min-width: 600px) {
@@ -44,7 +43,13 @@ export const StyledSearchIcon = styled.div`
 export const StyledInput = styled(InputBase)`
   input {
     padding: 8px 8px 8px calc(1em + 32px);
+    color: white;
   }
+`;
+
+export const SimplifiedToggleButton = styled.div`
+  // flex approach to floating button to right of app-bar
+  margin-left: auto;
 `;
 
 export const MenuButtonWrapper = styled.div`

@@ -1,15 +1,19 @@
-import React from "react";
-
+import React, { useContext } from "react";
+import { store } from "store";
 import { StyledLink as Link, Word } from "./style";
 
 export default function WordListView(props) {
-  const { isSimplifiedMode, wordData } = props;
+  const { wordData } = props;
+
+  const context = useContext(store);
+  const { state } = context;
+  const { isSimplifiedMode } = state;
 
   return (
     <div>
       {wordData.map((word) => (
         <Word>
-          {renderWord(isSimplifiedMode, word)}
+          {renderWord(word, isSimplifiedMode)}
           {formatDefinitions(word.definition_entries)}
         </Word>
       ))}
@@ -17,11 +21,11 @@ export default function WordListView(props) {
   );
 }
 
-const renderWord = (isSimplifiedMode, word) => {
-  const wordChars = isSimplifiedMode ? word.simp : word.trad;
+const renderWord = (word, isSimplifiedMode) => {
+  const displayedWord = isSimplifiedMode ? word.simp : word.trad;
   return (
     <div class="word">
-      <Link to={`/word/${word.simp}`}>{wordChars}</Link>
+      <Link to={`/word/${displayedWord}`}>{displayedWord}</Link>
     </div>
   );
 };

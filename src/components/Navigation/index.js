@@ -19,10 +19,13 @@ import InputBase from "@material-ui/core/InputBase";
 import SearchIcon from "@material-ui/icons/Search";
 import { useHistory } from "react-router-dom";
 
+import SimplifiedToggle from "components/SimplifiedToggle";
+
 import {
   Content,
   MenuButtonWrapper,
   Title,
+  SimplifiedToggleButton,
   StyledLink as Link,
   StyledSearchBar,
   StyledSearchIcon,
@@ -139,6 +142,9 @@ export default function Navigation(props) {
               }}
             />
           </StyledSearchBar>
+          <SimplifiedToggleButton>
+            <SimplifiedToggle />
+          </SimplifiedToggleButton>
         </Toolbar>
       </AppBar>
       <SwipeableDrawer
