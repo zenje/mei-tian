@@ -3,11 +3,15 @@ from .dictionary import get_dictionary, get_hsk2, get_hsk3
 
 import json
 import requests
+import opencc
 from bs4 import BeautifulSoup
 from xpinyin import Pinyin
 
 words = Blueprint("words", __name__)
 p = Pinyin()
+converter = opencc.OpenCC(
+    "s2t.json"
+)  # converter utility to convert from simplified to traditional
 
 
 def random_entry():
@@ -37,15 +41,22 @@ def get_sentences(word):
             sentence = {}
             sentence["english"] = text
         else:
-            sentence["chinese"] = text
+            sentence["simplified"] = text
+            sentence["traditional"] = convert_to_traditional(text)
             sentence["pinyin"] = get_pinyin(text)
             sentences.append(sentence)
 
     return sentences
 
 
+def convert_to_traditional(simplified_text):
+    return converter.convert(simplified_text)
+
+
 def get_pinyin(chinese_text):
-    return p.get_pinyin(chinese_text, tone_marks="marks", splitter=" ")
+    pinyin = p.get_pinyin(chinese_text, tone_marks="marks", splitter=" ")
+    pinyin = pinyin.replace(" 。", ".").replace(" ，", ",")
+    return pinyin
 
 
 @words.route("/api/word/<word>")
