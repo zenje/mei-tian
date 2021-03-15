@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import InputBase from "@material-ui/core/InputBase";
+import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import { Link } from "react-router-dom";
 
 export const Title = styled.h1`
@@ -57,9 +58,23 @@ export const MenuButtonWrapper = styled.div`
   display: ${(props) => (!props.open ? "block" : "none")};
 `;
 
+export const DrawerWrapper = styled.div``;
+export const Drawer = styled(SwipeableDrawer)`
+  //width: 150px;
+`;
+
+export const DrawerContent = styled.div`
+  width: 200px;
+`;
+
+export const Header = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  justify-content: flex-end;
+`;
+
 export const Content = styled.div`
   flex-grow: 1;
   padding-top: 1rem;
-  margin-left: ${(props) => (!props.open ? "-150px" : "0px")};
-  transition: margin 0.2s ease-out;
-`;
+  `;

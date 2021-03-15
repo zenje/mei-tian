@@ -3,7 +3,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { store } from "store";
 
 const getSentences = (sentences, simp, trad, isSimplifiedMode) => {
-  const word = isSimplifiedMode ? simp : trad;
+    const word = (isSimplifiedMode) ? simp : trad;
   if (!sentences || !sentences.length || !word) {
     return;
   }
@@ -14,10 +14,7 @@ const getSentences = (sentences, simp, trad, isSimplifiedMode) => {
         <p>
           {item.english}
           <br />
-          {boldWordInSentence(
-            isSimplifiedMode ? item.simplified : item.traditional,
-            word
-          )}
+          {boldWordInSentence((isSimplifiedMode) ? item.simplified : item.traditional, word)}
           <br />
           {item.pinyin}
         </p>
@@ -42,13 +39,13 @@ const boldWordInSentence = (sentence, word) => {
 
 const formatDefinitions = (entries) => {
   return (
-    <ul>
+    <div>
       {entries.map((entry) => (
         <div>
           <b>[{entry.pinyin}]</b> {entry.definitions.join(", ")}
         </div>
       ))}
-    </ul>
+    </div>
   );
 };
 
@@ -120,16 +117,12 @@ export default function Word(props) {
   return (
     <>
       {renderWord(wordData, isSimplifiedMode)}
-      <div>{formatDefinitions(wordData.definition_entries)}</div>
+      {formatDefinitions(wordData.definition_entries)}
+      <br/>
       {wordData.hsk2 && <div>HSK2 - [ Level {wordData.hsk2} ]</div>}
       {wordData.hsk3 && <div>HSK3 - [ {wordData.hsk3} ]</div>}
       <div>-</div>
-      {getSentences(
-        wordData.sentences,
-        wordData.simp,
-        wordData.trad,
-        isSimplifiedMode
-      )}
+      {getSentences(wordData.sentences, wordData.simp, wordData.trad, isSimplifiedMode)}
     </>
   );
 }
