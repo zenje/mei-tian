@@ -52,9 +52,7 @@ export default function Navigation(props) {
 
   return (
     <>
-      <AppBar
-      position="fixed"
-      >
+      <AppBar position="fixed">
         <Toolbar>
           <MenuButtonWrapper open={open}>
             <IconButton
