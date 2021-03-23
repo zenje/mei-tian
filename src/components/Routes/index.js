@@ -1,5 +1,6 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
+import History from "components/History";
 import HSK2Grid from "components/HSK2Grid";
 import HSK3Grid from "components/HSK3Grid";
 import RandomWord from "components/RandomWord";
@@ -17,6 +18,9 @@ export default function Routes() {
       </Route>
       <Route path="/hsk3">
         <HSK3Grid />
+      </Route>
+      <Route path="/history">
+        <History />
       </Route>
       <Route path="/word/:word">
         <WordWithParams />

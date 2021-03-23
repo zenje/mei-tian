@@ -68,9 +68,9 @@ const renderGridListButton = (isGridView, toggleViewFn) => {
 
 const renderWords = (isGridView, wordData) => {
   return isGridView ? (
-    <WordGridView isSimplifiedMode={true} wordData={wordData} />
+    <WordGridView wordData={wordData} />
   ) : (
-    <WordListView isSimplifiedMode={true} wordData={wordData} />
+    <WordListView wordData={wordData} />
   );
 };
 

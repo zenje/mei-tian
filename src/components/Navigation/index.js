@@ -33,7 +33,7 @@ import {
   StyledInput as Input,
 } from "./style";
 
-const ListItemLink = (props) => <ListItem button component="a" {...props} />;
+//const ListItemLink = (props) => <ListItem button {...props} />;
 
 export default function Navigation(props) {
   const { content } = props;
@@ -110,14 +110,16 @@ export default function Navigation(props) {
             <Divider />
             <List>
               {NAVIGATION_LINKS.map((item, index) => (
-                <ListItemLink
-                  href={item.link}
+                <ListItem
+                  button
                   onClick={handleDrawerClose}
                   key={item.text}
                   selected={item.link === path}
                 >
-                  <ListItemText primary={item.text} />
-                </ListItemLink>
+                  <Link to={item.link}>
+                    <ListItemText primary={item.text} />
+                  </Link>
+                </ListItem>
               ))}
             </List>
           </DrawerContent>

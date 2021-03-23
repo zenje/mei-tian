@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-
+import { ADD_TO_HISTORY } from "actions";
 import { store } from "store";
 
 const getSentences = (sentences, simp, trad, isSimplifiedMode) => {
@@ -87,13 +87,15 @@ export default function Word(props) {
   const [wordData, setWordData] = useState(wordDataProp);
 
   const context = useContext(store);
-  const { state } = context;
+  const { state, dispatch } = context;
   const { isSimplifiedMode } = state;
 
   const handleData = (data) => {
     console.log("data", data);
-    setWordData(data.word);
+    const { word } = data;
+    setWordData(word);
     setIsLoading(false);
+    dispatch({ type: ADD_TO_HISTORY, word });
   };
 
   useEffect(() => {

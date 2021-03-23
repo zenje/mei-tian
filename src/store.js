@@ -1,9 +1,10 @@
 import React, { createContext, useReducer } from "react";
 
-import { TOGGLE_SIMPLIFIED_MODE } from "actions";
+import { ADD_TO_HISTORY, CLEAR_HISTORY, TOGGLE_SIMPLIFIED_MODE } from "actions";
 
 const initialState = {
   isSimplifiedMode: true,
+  history: [],
 };
 const store = createContext(initialState);
 const { Provider } = store;
@@ -11,10 +12,20 @@ const { Provider } = store;
 const reducer = (state, action) => {
   switch (action.type) {
     case TOGGLE_SIMPLIFIED_MODE:
-      const newState = {
+      return {
+        ...state,
         isSimplifiedMode: !state.isSimplifiedMode,
       };
-      return newState;
+    case ADD_TO_HISTORY:
+      return {
+        ...state,
+        history: [...state.history, action.word],
+      };
+    case CLEAR_HISTORY:
+      return {
+        ...state,
+        history: [],
+      };
     default:
       throw new Error();
   }
