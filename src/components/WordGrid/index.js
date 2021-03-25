@@ -8,7 +8,7 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import WordGridView from "components/WordGridView";
 import WordListView from "components/WordListView";
-import { GridListButton, StyledTabs, TabsContainer } from "./style";
+import { GridListButton, TabsContainer } from "./style";
 
 export default function WordGrid(props) {
   const { endpoint, levels, title } = props;
@@ -75,22 +75,22 @@ const renderWords = (isGridView, wordData) => {
 };
 
 const getTabs = (selectedLevel, handleTab, levels) => {
-  const style = {
-    minWidth: "32px",
-  };
   return (
     <TabsContainer>
-      <StyledTabs
-        value={selectedLevel}
-        onChange={handleTab}
-        indicatorColor="primary"
-        textColor="primary"
-        centered
-      >
-        {levels.map((level) => (
-          <Tab label={level} value={level} style={style} />
-        ))}
-      </StyledTabs>
+      <Paper>
+        <Tabs
+          value={selectedLevel}
+          onChange={handleTab}
+          indicatorColor="primary"
+          textColor="text"
+          variant="scrollable"
+          scrollButtons="on"
+        >
+          {levels.map((level) => (
+            <Tab label={level} value={level} />
+          ))}
+        </Tabs>
+      </Paper>
     </TabsContainer>
   );
 };

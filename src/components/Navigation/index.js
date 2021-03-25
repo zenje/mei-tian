@@ -110,16 +110,16 @@ export default function Navigation(props) {
             <Divider />
             <List>
               {NAVIGATION_LINKS.map((item, index) => (
-                <ListItem
-                  button
-                  onClick={handleDrawerClose}
-                  key={item.text}
-                  selected={item.link === path}
-                >
-                  <Link to={item.link}>
+                <Link to={item.link}>
+                  <ListItem
+                    button
+                    onClick={handleDrawerClose}
+                    key={item.text}
+                    selected={item.link === path}
+                  >
                     <ListItemText primary={item.text} />
-                  </Link>
-                </ListItem>
+                  </ListItem>
+                </Link>
               ))}
             </List>
           </DrawerContent>
