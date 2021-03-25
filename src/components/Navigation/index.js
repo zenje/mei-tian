@@ -24,6 +24,7 @@ import {
   DrawerContent,
   DrawerWrapper,
   Header,
+  ListIcon,
   MenuButtonWrapper,
   Title,
   SimplifiedToggleButton,
@@ -117,7 +118,16 @@ export default function Navigation(props) {
                     key={item.label}
                     selected={item.link === path}
                   >
-                    <ListItemText primary={item.label} />
+                    <ListItemText
+                      primary={
+                        <>
+                          <ListIcon>
+                            {item.link === path ? item.selectedIcon : item.icon}
+                          </ListIcon>
+                          {item.label}
+                        </>
+                      }
+                    />
                   </ListItem>
                 </Link>
               ))}

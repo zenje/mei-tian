@@ -4,7 +4,7 @@ import { useTheme } from "@material-ui/core/styles";
 import { ADD_TO_HISTORY } from "actions";
 import { store } from "store";
 
-import { Definition, Sentence, WordCard, WordTitle } from "./style";
+import { Definition, HskInfo, Sentence, WordCard, WordTitle } from "./style";
 
 const getSentences = (
   sentences,
@@ -103,6 +103,27 @@ const getCharDifference = (word1, word2) => {
   return result;
 };
 
+const renderHskInfo = (wordData, color) => {
+  return (
+    <HskInfo color={color}>
+      {wordData.hsk2 && (
+        <div>
+          <small>
+            <b>HSK2</b> - [ Level {wordData.hsk2} ]
+          </small>
+        </div>
+      )}
+      {wordData.hsk3 && (
+        <div>
+          <small>
+            <b>HSK3</b> - [ {wordData.hsk3} ]
+          </small>
+        </div>
+      )}
+    </HskInfo>
+  );
+};
+
 export default function Word(props) {
   const { word, wordDataProp } = props;
   const [isLoading, setIsLoading] = useState(props.isLoading);
@@ -154,16 +175,7 @@ export default function Word(props) {
           {renderWord(wordData, isSimplifiedMode, primary.light)}
           {formatDefinitions(wordData.definition_entries, primary.main)}
           <br />
-          {wordData.hsk2 && (
-            <div>
-              <small>HSK2 - [ Level {wordData.hsk2} ]</small>
-            </div>
-          )}
-          {wordData.hsk3 && (
-            <div>
-              <small>HSK3 - [ {wordData.hsk3} ]</small>
-            </div>
-          )}
+          {renderHskInfo(wordData, text.secondary)}
         </CardContent>
       </WordCard>
       {getSentences(

@@ -1,10 +1,38 @@
+import HistoryIcon from "@material-ui/icons/History";
+import HomeIcon from "@material-ui/icons/Home";
+import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
+import Looks2Icon from "@material-ui/icons/LooksTwo";
+import Looks2OutlinedIcon from "@material-ui/icons/LooksTwoOutlined";
+import Looks3Icon from "@material-ui/icons/Looks3";
+import Looks3OutlinedIcon from "@material-ui/icons/Looks3Outlined";
+
 export const TITLE = "mei-tian";
 
 export const NAVIGATION_LINKS = [
-  { label: "Home", link: "/" },
-  { label: "HSK 2.0", link: "/hsk2" },
-  { label: "HSK 3.0", link: "/hsk3" },
-  { label: "History", link: "/history" },
+  {
+    icon: <HomeOutlinedIcon />,
+    selectedIcon: <HomeIcon />,
+    label: "Home",
+    link: "/",
+  },
+  {
+    icon: <Looks2OutlinedIcon />,
+    selectedIcon: <Looks2Icon />,
+    label: "HSK 2.0",
+    link: "/hsk2",
+  },
+  {
+    icon: <Looks3OutlinedIcon />,
+    selectedIcon: <Looks3Icon />,
+    label: "HSK 3.0",
+    link: "/hsk3",
+  },
+  {
+    icon: <HistoryIcon />,
+    selectedIcon: <HistoryIcon />,
+    label: "History",
+    link: "/history",
+  },
 ];
 
 export const HSK2_TITLE = "HSK 2.0";

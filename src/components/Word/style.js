@@ -41,3 +41,7 @@ export const Sentence = styled.p`
     color: ${(props) => props.accentColor};
   }
 `;
+
+export const HskInfo = styled.div`
+  color: ${(props) => props.color};
+`;

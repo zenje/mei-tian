@@ -23,14 +23,27 @@ export const theme = createMuiTheme({
     },
   },
   overrides: {
-    MuiTouchRipple: {
-      child: {
-        backgroundColor: "#ff867a",
+    MuiListItem: {
+      root: {
+        "&$selected, &$selected:hover": {
+          backgroundColor: "inherit",
+          fontWeight: "bold",
+          color: "#ef5350",
+        },
+      },
+      gutters: {
+        paddingLeft: "0px",
+      },
+      selected: {
+        "& div.MuiListItemText-root": {
+          paddingLeft: "calc(1.2rem - 4px)", // subtract border width
+          borderLeft: "4px solid #ef5350",
+        },
       },
     },
-    MuiTabs: {
-      indicator: {
-        height: "4px",
+    MuiListItemText: {
+      root: {
+        paddingLeft: "1.2rem",
       },
     },
     MuiTab: {
@@ -38,13 +51,15 @@ export const theme = createMuiTheme({
         color: "#ef5350", // secondary.main
       },
     },
-  },
-  /*overrides: {
-    MuiPaper: {
-      root: {
-          backgroundColor: 'rgba(255, 255, 255, 0.05)',
-          color: 'rgba(255, 255, 255, 0.75)',
+    MuiTabs: {
+      indicator: {
+        height: "3px",
       },
     },
-  }*/
+    MuiTouchRipple: {
+      child: {
+        backgroundColor: "#ff867a",
+      },
+    },
+  },
 });

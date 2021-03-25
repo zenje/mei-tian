@@ -67,6 +67,12 @@ export const DrawerContent = styled.div`
   width: 200px;
 `;
 
+export const ListIcon = styled.span`
+  padding-right: 1rem;
+  position: relative;
+  top: 0.3rem;
+`;
+
 export const Header = styled.div`
   display: flex;
   align-items: center;
