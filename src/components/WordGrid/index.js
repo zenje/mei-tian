@@ -81,13 +81,13 @@ const getTabs = (selectedLevel, handleTab, levels) => {
         <Tabs
           value={selectedLevel}
           onChange={handleTab}
-          indicatorColor="primary"
+          indicatorColor="secondary"
           textColor="text"
           variant="scrollable"
           scrollButtons="on"
         >
-          {levels.map((level) => (
-            <Tab label={level} value={level} />
+          {levels.map((item) => (
+            <Tab label={item.label} value={item.value} />
           ))}
         </Tabs>
       </Paper>

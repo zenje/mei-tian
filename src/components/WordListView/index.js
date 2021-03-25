@@ -1,9 +1,13 @@
 import React, { useContext } from "react";
+import CardContent from "@material-ui/core/CardContent";
+import { useTheme } from "@material-ui/core/styles";
 import { store } from "store";
-import { StyledLink as Link, Word } from "./style";
+import { StyledLink as Link, Word, WordCard } from "./style";
 
 export default function WordListView(props) {
   const { wordData } = props;
+  const theme = useTheme();
+  const { primary } = theme.palette;
 
   const context = useContext(store);
   const { state } = context;
@@ -11,22 +15,24 @@ export default function WordListView(props) {
 
   return (
     <div>
-      {wordData.map((word) => (
-        <Word>
-          {renderWord(word, isSimplifiedMode)}
-          {formatDefinitions(word.definition_entries)}
-        </Word>
-      ))}
+      {wordData.map((word) => renderWordCard(word, isSimplifiedMode, primary))}
     </div>
   );
 }
 
-const renderWord = (word, isSimplifiedMode) => {
+const renderWordCard = (word, isSimplifiedMode, primary) => {
   const displayedWord = isSimplifiedMode ? word.simp : word.trad;
   return (
-    <div class="word">
-      <Link to={`/word/${displayedWord}`}>{displayedWord}</Link>
-    </div>
+    <Link to={`/word/${displayedWord}`}>
+      <WordCard>
+        <CardContent>
+          <Word color={primary.light} accentColor={primary.main}>
+            <div class="word">{displayedWord}</div>
+            {formatDefinitions(word.definition_entries)}
+          </Word>
+        </CardContent>
+      </WordCard>
+    </Link>
   );
 };
 

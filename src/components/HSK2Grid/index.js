@@ -1,19 +1,18 @@
 import React from "react";
 import WordGrid from "components/WordGrid";
+import { HSK2_TITLE, HSK2_LEVELS } from "../../constants";
 
 export default function HSK2Grid(props) {
   const endpoint = "/api/hsk2/";
-  const levels = [1, 2, 3, 4, 5, 6];
-  const selectedLevel = 1;
-  const title = "HSK 2.0";
+  const selectedLevel = HSK2_LEVELS[0].value;
 
   return (
     <>
       <WordGrid
         endpoint={endpoint}
-        levels={levels}
+        levels={HSK2_LEVELS}
         selectedLevel={selectedLevel}
-        title={title}
+        title={HSK2_TITLE}
       />
     </>
   );

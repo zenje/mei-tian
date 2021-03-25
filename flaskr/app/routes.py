@@ -55,7 +55,14 @@ def convert_to_traditional(simplified_text):
 
 def get_pinyin(chinese_text):
     pinyin = p.get_pinyin(chinese_text, tone_marks="marks", splitter=" ")
-    pinyin = pinyin.replace(" 。", ".").replace(" ，", ",")
+    pinyin = (
+        pinyin.replace(" 。", ".")
+        .replace(" ，", ",")
+        .replace("；", ";")
+        .replace("：", ":")
+        .replace("（", "(")
+        .replace("）", ")")
+    )
     return pinyin
 
 
@@ -112,6 +119,6 @@ def fetch_hsk3(category):
     elif category == "advanced":
         result = hsk3.get_advanced()
     else:
-        result == hsk3.get_supplemental()
+        result = hsk3.get_supplemental()
 
     return json.dumps(result, default=lambda o: o.__dict__)

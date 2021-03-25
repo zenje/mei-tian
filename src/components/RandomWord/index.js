@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Word from "components/Word";
-import RefreshIcon from "@material-ui/icons/Refresh";
+import { StyledRefreshIcon as RefreshIcon } from "./style";
 
 export default function RandomWord() {
   const [isLoading, setIsLoading] = useState(true);
@@ -37,13 +37,14 @@ export default function RandomWord() {
 
   return (
     <>
-      <h2>a random word of the day:</h2>
-      <RefreshIcon
-        onClick={() => refreshHandler()}
-        fontSize="large"
-        style={{ fill: "white" }}
-      />
-      <br />
+      <h2>
+        a random word of the day:{" "}
+        <RefreshIcon
+          onClick={() => refreshHandler()}
+          fontSize="large"
+          color="text"
+        />
+      </h2>
       <Word wordDataProp={wordData} isLoading={isLoading} />
     </>
   );

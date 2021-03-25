@@ -15,6 +15,17 @@ export const Main = styled.div`
   align-items: center;
   justify-content: start;
   font-size: calc(10px + 2vmin);
+  //font-size: calc(1vw + 1vh + .5vmin);
+  /*
+  h1 {
+    font-size: 5.9vw;
+  }
+  h2 {
+      font-size: 3.0vh;
+  }
+  p {
+      font-size: 2vmin;
+  }*/
 `;
 
 export const ToolbarSpacing = styled.div`

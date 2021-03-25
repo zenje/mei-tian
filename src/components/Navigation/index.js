@@ -114,10 +114,10 @@ export default function Navigation(props) {
                   <ListItem
                     button
                     onClick={handleDrawerClose}
-                    key={item.text}
+                    key={item.label}
                     selected={item.link === path}
                   >
-                    <ListItemText primary={item.text} />
+                    <ListItemText primary={item.label} />
                   </ListItem>
                 </Link>
               ))}

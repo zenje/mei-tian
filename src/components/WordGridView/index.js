@@ -1,17 +1,16 @@
 import React, { useContext } from "react";
+import { useTheme } from "@material-ui/core/styles";
 import { store } from "store";
-
 import Card from "@material-ui/core/Card";
 import Grid from "@material-ui/core/Grid";
-
 import { StyledCardContent as CardContent, StyledLink as Link } from "./style";
 
-const renderWord = (word, isSimplifiedMode) => {
+const renderWord = (word, isSimplifiedMode, color) => {
   const displayedWord = isSimplifiedMode ? word.simp : word.trad;
   return (
     <Link to={`/word/${displayedWord}`}>
       <Card>
-        <CardContent>{displayedWord}</CardContent>
+        <CardContent color={color}>{displayedWord}</CardContent>
       </Card>
     </Link>
   );
@@ -19,6 +18,8 @@ const renderWord = (word, isSimplifiedMode) => {
 
 export default function WordGridView(props) {
   const { wordData } = props;
+  const theme = useTheme();
+  const wordColor = theme.palette.primary.light;
 
   const context = useContext(store);
   const { state } = context;
@@ -29,7 +30,7 @@ export default function WordGridView(props) {
       <Grid container spacing={3}>
         {wordData.map((word) => (
           <Grid item xs={6} sm={4} md={3} lg={2}>
-            {renderWord(word, isSimplifiedMode)}
+            {renderWord(word, isSimplifiedMode, wordColor)}
           </Grid>
         ))}
       </Grid>

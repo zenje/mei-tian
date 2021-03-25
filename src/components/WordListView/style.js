@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import Card from "@material-ui/core/Card";
 import { Link } from "react-router-dom";
 
 export const StyledLink = styled(Link)`
@@ -12,10 +12,14 @@ export const Word = styled.div`
   text-align: left;
   display: flex;
   flex-direction: column;
-  padding: 1rem;
   .word {
     width: 100%;
     font-size: 2rem;
+    color: ${(props) => props.color};
+    text-align: center;
+  }
+  b {
+    color: ${(props) => props.accentColor};
   }
   .definition {
     width: 100%;
@@ -32,4 +36,8 @@ export const Word = styled.div`
       padding-left: 2rem;
     }
   }
+`;
+
+export const WordCard = styled(Card)`
+  margin-bottom: 1rem;
 `;

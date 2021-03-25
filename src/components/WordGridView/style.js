@@ -8,4 +8,5 @@ export const StyledLink = styled(Link)`
 `;
 export const StyledCardContent = styled(CardContent)`
   font-size: 2rem;
+  color: ${(props) => props.color};
 `;

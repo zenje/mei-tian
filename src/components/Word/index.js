@@ -1,8 +1,21 @@
 import React, { useState, useEffect, useContext } from "react";
+import CardContent from "@material-ui/core/CardContent";
+import { useTheme } from "@material-ui/core/styles";
 import { ADD_TO_HISTORY } from "actions";
 import { store } from "store";
 
-const getSentences = (sentences, simp, trad, isSimplifiedMode) => {
+import { Definition, Sentence, WordCard, WordTitle } from "./style";
+
+const getSentences = (
+  sentences,
+  simp,
+  trad,
+  isSimplifiedMode,
+  accentColor,
+  chineseColor,
+  englishColor,
+  pinyinColor
+) => {
   const word = isSimplifiedMode ? simp : trad;
   if (!sentences || !sentences.length || !word) {
     return;
@@ -11,16 +24,21 @@ const getSentences = (sentences, simp, trad, isSimplifiedMode) => {
   return (
     <div>
       {sentences.slice(0, 5).map((item, index) => (
-        <p>
-          {item.english}
+        <Sentence
+          accentColor={accentColor}
+          chineseColor={chineseColor}
+          englishColor={englishColor}
+          pinyinColor={pinyinColor}
+        >
+          <span class="english">{item.english}</span>
           <br />
           {boldWordInSentence(
             isSimplifiedMode ? item.simplified : item.traditional,
             word
           )}
           <br />
-          {item.pinyin}
-        </p>
+          <small class="pinyin">{item.pinyin}</small>
+        </Sentence>
       ))}
     </div>
   );
@@ -30,29 +48,29 @@ const boldWordInSentence = (sentence, word) => {
   const index = sentence.indexOf(word);
   if (index > -1) {
     return (
-      <>
+      <span class="chinese">
         {sentence.slice(0, index)}
         <b>{word}</b>
         {sentence.slice(index + word.length)}
-      </>
+      </span>
     );
   }
   return sentence;
 };
 
-const formatDefinitions = (entries) => {
+const formatDefinitions = (entries, accentColor) => {
   return (
     <div>
       {entries.map((entry) => (
-        <div>
+        <Definition accentColor={accentColor}>
           <b>[{entry.pinyin}]</b> {entry.definitions.join(", ")}
-        </div>
+        </Definition>
       ))}
     </div>
   );
 };
 
-const renderWord = (wordData, isSimplifiedMode) => {
+const renderWord = (wordData, isSimplifiedMode, color) => {
   const { simp, trad } = wordData;
   let displayedWord;
   if (simp === trad) {
@@ -64,8 +82,12 @@ const renderWord = (wordData, isSimplifiedMode) => {
     let charDifference = getCharDifference(simp, trad);
     displayedWord = `${trad} [ ${charDifference} ]`;
   }
-  return <h2>{displayedWord}</h2>;
+  return renderWordTitle(displayedWord, color);
 };
+
+const renderWordTitle = (word, color) => (
+  <WordTitle color={color}>{word}</WordTitle>
+);
 
 // compares characters of `word1` and `word2`, displaying `word1` characters
 // if different; otherwise, displays a '-' for characters that are the same
@@ -85,6 +107,8 @@ export default function Word(props) {
   const { word, wordDataProp } = props;
   const [isLoading, setIsLoading] = useState(props.isLoading);
   const [wordData, setWordData] = useState(wordDataProp);
+  const theme = useTheme();
+  const { primary, secondary, text } = theme.palette;
 
   const context = useContext(store);
   const { state, dispatch } = context;
@@ -113,25 +137,44 @@ export default function Word(props) {
   if (isLoading || !wordData) {
     return (
       <>
-        {word && <h2>{word}</h2>}
-        <div>...loading</div>
+        <WordCard>
+          <CardContent>
+            {word && renderWordTitle(word, primary.light)}
+            <div>...loading</div>
+          </CardContent>
+        </WordCard>
       </>
     );
   }
 
   return (
     <>
-      {renderWord(wordData, isSimplifiedMode)}
-      {formatDefinitions(wordData.definition_entries)}
-      <br />
-      {wordData.hsk2 && <div>HSK2 - [ Level {wordData.hsk2} ]</div>}
-      {wordData.hsk3 && <div>HSK3 - [ {wordData.hsk3} ]</div>}
-      <div>-</div>
+      <WordCard>
+        <CardContent>
+          {renderWord(wordData, isSimplifiedMode, primary.light)}
+          {formatDefinitions(wordData.definition_entries, primary.main)}
+          <br />
+          {wordData.hsk2 && (
+            <div>
+              <small>HSK2 - [ Level {wordData.hsk2} ]</small>
+            </div>
+          )}
+          {wordData.hsk3 && (
+            <div>
+              <small>HSK3 - [ {wordData.hsk3} ]</small>
+            </div>
+          )}
+        </CardContent>
+      </WordCard>
       {getSentences(
         wordData.sentences,
         wordData.simp,
         wordData.trad,
-        isSimplifiedMode
+        isSimplifiedMode,
+        secondary.light,
+        primary.main,
+        text.secondary,
+        text.secondary
       )}
     </>
   );
