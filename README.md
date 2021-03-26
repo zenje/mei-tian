@@ -1,70 +1,86 @@
-# Getting Started with Create React App
+# mei-tian
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React-Flask-based Chinese-English dictionary app! (Additional functionality still in progress!)
 
-## Available Scripts
+View live on heroku: [mei-tian.herokuapp.com/](mei-tian.herokuapp.com/)
 
-In the project directory, you can run:
+## About
+### Features:
+* Lookup of Chinese words with definitions and sample sentences
+* Displays random Chinese word on loading homepage
+* HSK 2.0 and HSK 3.0 word lists
+* Local history of user's word lookups
 
-### `yarn start`
+### Technologies:
+This app uses [React](https://reactjs.org) and [Material-UI](https://material-ui.com) for the front-end; Python web framework [Flask](https://flask.palletsprojects.com/en/1.1.x/) for the back-end, served by a [Gunicorn](https://gunicorn.org) web server; deployed on [Heroku](https://www.heroku.com).
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Utilizes python package [chinese-english-lookup](https://github.com/zenje/chinese-english-lookup) created for this project to look up Chinese-English definitions.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Sources:
+* Chinese-English definitions from [CC-CEDICT](https://www.mdbg.net/chinese/dictionary?page=cedict)
+* Sample Chinese sentences from [jukuu](http://www.jukuu.com)
 
-### `yarn test`
+## Running locally
+### Build front-end:
+```
+npm run build
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Run `eslint`, sort imports:
+```
+npm run lint
+```
 
-### `yarn build`
+### Start local gunicorn web server:
+```
+heroku local -f Procfile.dev
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Deployment setup
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+See [heroku docs](https://devcenter.heroku.com/articles/git) for more info.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Add buildpacks:
+```
+heroku buildpacks:set heroku/python
+heroku buildpacks:set heroku/nodejs
+```
+**Note**: The python buildpack should be added first.
 
-### `yarn eject`
+This can also be done through heroku app settings.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Add web dyno:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Create Procfile with web process to start gunicorn:
+```
+web: gunicorn --chdir flaskr "app:create_app()"
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Scale app dyno (1 web process); [docs on dynos](https://devcenter.heroku.com/articles/dynos):
+```
+heroku ps:scale web=1
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+List dynos:
+```
+heroku ps
+```
+```bash
+=== web (Free): gunicorn --chdir flaskr "app:create_app()" (1)
+web.1: idle 2021/03/26 08:02:40 +0000 (~ 9m ago)
+```
 
-## Learn More
+### Add requirements.txt:
+```
+touch requirements.txt
+pip freeze > requirements.txt
+```
+(Can remove unnecessary dependencies.) This file should be updated when new dependencies are added.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Deploying:
+```
+git push heroku master
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
