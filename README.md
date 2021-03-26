@@ -2,13 +2,14 @@
 
 A React-Flask-based Chinese-English dictionary app! (Additional functionality still in progress!)
 
-View live on heroku: [mei-tian.herokuapp.com/](mei-tian.herokuapp.com/)
+View live on heroku: [mei-tian.herokuapp.com/](http://mei-tian.herokuapp.com/)
 
 ## About
 ### Features:
 * Lookup of Chinese words with definitions and sample sentences
 * Displays random Chinese word on loading homepage
 * HSK 2.0 and HSK 3.0 word lists
+* Simplified / traditional character view toggle
 * Local history of user's word lookups
 
 ### Technologies:
