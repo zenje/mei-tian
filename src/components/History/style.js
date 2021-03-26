@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import ClearIcon from "@material-ui/icons/ClearRounded";
+import SearchIcon from "@material-ui/icons/Search";
 
-export const StyledClearIcon = styled(ClearIcon)`
+export const StyledSearchIcon = styled(SearchIcon)`
   position: relative;
   top: 0.5rem;
 `;
