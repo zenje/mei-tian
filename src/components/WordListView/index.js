@@ -1,8 +1,11 @@
-import React, { useContext } from "react";
-import CardContent from "@material-ui/core/CardContent";
-import { useTheme } from "@material-ui/core/styles";
-import { store } from "store";
-import { StyledLink as Link, Word, WordCard } from "./style";
+import React, { useContext } from 'react';
+
+import CardContent from '@material-ui/core/CardContent';
+import { useTheme } from '@material-ui/core/styles';
+
+import { store } from 'store';
+
+import { StyledLink as Link, Word, WordCard } from './style';
 
 export default function WordListView(props) {
   const { wordData } = props;
@@ -27,7 +30,7 @@ const renderWordCard = (word, isSimplifiedMode, primary) => {
       <WordCard>
         <CardContent>
           <Word color={primary.light} accentColor={primary.main}>
-            <div class="word">{displayedWord}</div>
+            <div className="word">{displayedWord}</div>
             {formatDefinitions(word.definition_entries)}
           </Word>
         </CardContent>
@@ -36,14 +39,12 @@ const renderWordCard = (word, isSimplifiedMode, primary) => {
   );
 };
 
-const formatDefinitions = (entries) => {
-  return (
-    <div class="definition">
-      {entries.map((entry) => (
-        <div>
-          <b>[{entry.pinyin}]</b> {entry.definitions.join(", ")}
-        </div>
-      ))}
-    </div>
-  );
-};
+const formatDefinitions = (entries) => (
+  <div className="definition">
+    {entries.map((entry) => (
+      <div>
+        <b>[{entry.pinyin}]</b> {entry.definitions.join(', ')}
+      </div>
+    ))}
+  </div>
+);

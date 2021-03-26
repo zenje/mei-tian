@@ -1,29 +1,16 @@
-import React, { useContext } from "react";
-import { store } from "store";
-import { CLEAR_HISTORY } from "actions";
-import Button from "@material-ui/core/Button";
-import WordListView from "components/WordListView";
-import ClearIcon from "@material-ui/icons/ClearRounded";
-//import SearchIcon from '@material-ui/icons/Search';
-import { StyledSearchIcon as SearchIcon } from "./style";
+import React, { useContext } from 'react';
 
-export default function History(props) {
-  const context = useContext(store);
-  const { state, dispatch } = context;
-  const { history } = state;
+import Button from '@material-ui/core/Button';
+import ClearIcon from '@material-ui/icons/ClearRounded';
 
-  const clearHistory = () => dispatch({ type: CLEAR_HISTORY });
+import { CLEAR_HISTORY } from 'actions';
+import WordListView from 'components/WordListView';
+import { store } from 'store';
 
-  return (
-    <>
-      <h2>History</h2>
-      {showHistory(history, clearHistory)}
-    </>
-  );
-}
+import { StyledSearchIcon as SearchIcon } from './style';
 
-const showHistory = (history, clearHistory) => {
-  return !history || !history.length ? (
+const showHistory = (history, clearHistory) =>
+  !history || !history.length ? (
     <div>
       <SearchIcon /> <span>No history available. Search for some words!</span>
     </div>
@@ -42,4 +29,18 @@ const showHistory = (history, clearHistory) => {
       </div>
     </div>
   );
-};
+
+export default function History() {
+  const context = useContext(store);
+  const { state, dispatch } = context;
+  const { history } = state;
+
+  const clearHistory = () => dispatch({ type: CLEAR_HISTORY });
+
+  return (
+    <>
+      <h2>History</h2>
+      {showHistory(history, clearHistory)}
+    </>
+  );
+}

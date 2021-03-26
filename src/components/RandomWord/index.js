@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from "react";
-import Word from "components/Word";
-import { StyledRefreshIcon as RefreshIcon } from "./style";
+import React, { useState, useEffect } from 'react';
+
+import Word from 'components/Word';
+
+import { StyledRefreshIcon as RefreshIcon } from './style';
 
 export default function RandomWord() {
   const [isLoading, setIsLoading] = useState(true);
@@ -13,7 +15,7 @@ export default function RandomWord() {
 
   const fetchRandomWord = () => {
     setIsLoading(true);
-    fetch("/api/randomWord")
+    fetch('/api/randomWord')
       .then((res) => res.json())
       .then(handleData);
   };
@@ -38,7 +40,7 @@ export default function RandomWord() {
   return (
     <>
       <h2>
-        a random word of the day:{" "}
+        a random word of the day:{' '}
         <RefreshIcon
           onClick={() => refreshHandler()}
           fontSize="large"

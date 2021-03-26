@@ -1,9 +1,12 @@
-import React, { useContext } from "react";
-import { useTheme } from "@material-ui/core/styles";
-import { store } from "store";
-import Card from "@material-ui/core/Card";
-import Grid from "@material-ui/core/Grid";
-import { StyledCardContent as CardContent, StyledLink as Link } from "./style";
+import React, { useContext } from 'react';
+
+import Card from '@material-ui/core/Card';
+import Grid from '@material-ui/core/Grid';
+import { useTheme } from '@material-ui/core/styles';
+
+import { store } from 'store';
+
+import { StyledCardContent as CardContent, StyledLink as Link } from './style';
 
 const renderWord = (word, isSimplifiedMode, color) => {
   const displayedWord = isSimplifiedMode ? word.simp : word.trad;

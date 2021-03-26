@@ -1,6 +1,6 @@
-import React, { createContext, useReducer } from "react";
+import React, { createContext, useReducer } from 'react';
 
-import { ADD_TO_HISTORY, CLEAR_HISTORY, TOGGLE_SIMPLIFIED_MODE } from "actions";
+import { ADD_TO_HISTORY, CLEAR_HISTORY, TOGGLE_SIMPLIFIED_MODE } from 'actions';
 
 const initialState = {
   isSimplifiedMode: true,

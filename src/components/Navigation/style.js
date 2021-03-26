@@ -1,7 +1,7 @@
-import styled from "styled-components";
-import InputBase from "@material-ui/core/InputBase";
-import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
-import { Link } from "react-router-dom";
+import InputBase from '@material-ui/core/InputBase';
+import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 export const Title = styled.h1`
   display: none;
@@ -54,8 +54,8 @@ export const SimplifiedToggleButton = styled.div`
 `;
 
 export const MenuButtonWrapper = styled.div`
-  margin-right: ${(props) => (!props.open ? "16px" : "0px")};
-  display: ${(props) => (!props.open ? "block" : "none")};
+  margin-right: ${(props) => (!props.open ? '16px' : '0px')};
+  display: ${(props) => (!props.open ? 'block' : 'none')};
 `;
 
 export const DrawerWrapper = styled.div``;

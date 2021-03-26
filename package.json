@@ -11,7 +11,7 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.1",
+    "react-scripts": "4.0.2",
     "styled-components": "^5.2.1",
     "web-vitals": "^0.2.4"
   },
@@ -20,13 +20,9 @@
     "start-api": "cd flaskr && flask run -h 167.99.167.0 --no-debugger",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "eject": "react-scripts eject",
+    "local": "heroku local -f Procfile.dev",
+    "lint": "npx eslint src/ --fix || exit 0"
   },
   "browserslist": {
     "production": [
@@ -42,6 +38,12 @@
   },
   "_proxy": "http://167.99.167.0:5000",
   "devDependencies": {
+    "eslint": "^7.22.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.23.1",
+    "eslint-plugin-react-hooks": "^4.2.0",
     "prettier": "^2.2.1"
   }
 }

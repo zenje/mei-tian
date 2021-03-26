@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import Card from "@material-ui/core/Card";
-import { Link } from "react-router-dom";
+import Card from '@material-ui/core/Card';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 export const StyledLink = styled(Link)`
   text-decoration: none;

@@ -1,9 +1,11 @@
-import React from "react";
-import WordGrid from "components/WordGrid";
-import { HSK3_TITLE, HSK3_LEVELS } from "../../constants";
+import React from 'react';
 
-export default function HSK3Grid(props) {
-  const endpoint = "/api/hsk3/";
+import WordGrid from 'components/WordGrid';
+
+import { HSK3_TITLE, HSK3_LEVELS } from '../../constants';
+
+export default function HSK3Grid() {
+  const endpoint = '/api/hsk3/';
   const selectedLevel = HSK3_LEVELS[0].value;
 
   return (

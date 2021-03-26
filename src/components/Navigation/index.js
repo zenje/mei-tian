@@ -1,23 +1,20 @@
-import React, { useState } from "react";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import List from "@material-ui/core/List";
-import Divider from "@material-ui/core/Divider";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
-import InputBase from "@material-ui/core/InputBase";
-import SearchIcon from "@material-ui/icons/Search";
-import { useHistory, useLocation } from "react-router-dom";
+import React, { useState } from 'react';
 
-import SimplifiedToggle from "components/SimplifiedToggle";
-import { NAVIGATION_LINKS, TITLE } from "../../constants";
+import AppBar from '@material-ui/core/AppBar';
+import Divider from '@material-ui/core/Divider';
+import IconButton from '@material-ui/core/IconButton';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import Toolbar from '@material-ui/core/Toolbar';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import MenuIcon from '@material-ui/icons/Menu';
+import SearchIcon from '@material-ui/icons/Search';
+import { useHistory, useLocation } from 'react-router-dom';
 
+import SimplifiedToggle from 'components/SimplifiedToggle';
+
+import { NAVIGATION_LINKS, TITLE } from '../../constants';
 import {
   Content,
   Drawer,
@@ -32,9 +29,7 @@ import {
   StyledSearchBar,
   StyledSearchIcon,
   StyledInput as Input,
-} from "./style";
-
-//const ListItemLink = (props) => <ListItem button {...props} />;
+} from './style';
 
 export default function Navigation(props) {
   const { content } = props;
@@ -76,16 +71,16 @@ export default function Navigation(props) {
               placeholder="Search…"
               type="search"
               onChange={(event) => {
-                console.log("event", event);
-                console.log("event " + event.target.value);
+                console.log('event', event);
+                console.log(`event ${event.target.value}`);
               }}
               onKeyDown={(event) => {
-                console.log("event.keyCode", event.keyCode);
+                console.log('event.keyCode', event.keyCode);
                 if (event.keyCode === 13) {
-                  console.log("event onkeydown", event);
-                  console.log("event onkeydown " + event.target.value);
-                  const value = event.target.value;
-                  history.push("/word/" + value);
+                  console.log('event onkeydown', event);
+                  console.log(`event onkeydown ${event.target.value}`);
+                  const { value } = event.target;
+                  history.push(`/word/${value}`);
                 }
               }}
             />
@@ -110,7 +105,7 @@ export default function Navigation(props) {
             </Header>
             <Divider />
             <List>
-              {NAVIGATION_LINKS.map((item, index) => (
+              {NAVIGATION_LINKS.map((item) => (
                 <Link to={item.link}>
                   <ListItem
                     button

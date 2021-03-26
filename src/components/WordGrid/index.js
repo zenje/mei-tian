@@ -1,14 +1,55 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
-import GridIcon from "@material-ui/icons/ViewModuleRounded";
-import ListIcon from "@material-ui/icons/ListRounded";
-import IconButton from "@material-ui/core/IconButton";
-import Paper from "@material-ui/core/Paper";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-import WordGridView from "components/WordGridView";
-import WordListView from "components/WordListView";
-import { GridListButton, TabsContainer } from "./style";
+import IconButton from '@material-ui/core/IconButton';
+import Paper from '@material-ui/core/Paper';
+import Tab from '@material-ui/core/Tab';
+import Tabs from '@material-ui/core/Tabs';
+import ListIcon from '@material-ui/icons/ListRounded';
+import GridIcon from '@material-ui/icons/ViewModuleRounded';
+
+import WordGridView from 'components/WordGridView';
+import WordListView from 'components/WordListView';
+
+import { GridListButton, TabsContainer } from './style';
+
+const renderGridListButton = (isGridView, toggleViewFn) => {
+  const icon = isGridView ? (
+    <ListIcon style={{ fill: 'white' }} />
+  ) : (
+    <GridIcon style={{ fill: 'white' }} />
+  );
+  return (
+    <GridListButton>
+      <IconButton onClick={toggleViewFn}>{icon}</IconButton>
+    </GridListButton>
+  );
+};
+
+const renderWords = (isGridView, wordData) =>
+  isGridView ? (
+    <WordGridView wordData={wordData} />
+  ) : (
+    <WordListView wordData={wordData} />
+  );
+
+const getTabs = (selectedLevel, handleTab, levels) => (
+  <TabsContainer>
+    <Paper>
+      <Tabs
+        value={selectedLevel}
+        onChange={handleTab}
+        indicatorColor="secondary"
+        textColor="text"
+        variant="scrollable"
+        scrollButtons="on"
+      >
+        {levels.map((item) => (
+          <Tab label={item.label} value={item.value} />
+        ))}
+      </Tabs>
+    </Paper>
+  </TabsContainer>
+);
 
 export default function WordGrid(props) {
   const { endpoint, levels, title } = props;
@@ -24,7 +65,7 @@ export default function WordGrid(props) {
   };
 
   const handleData = (data) => {
-    console.log("data", data);
+    console.log('data', data);
     setWordData(data);
     setIsLoading(false);
   };
@@ -52,45 +93,3 @@ export default function WordGrid(props) {
     </>
   );
 }
-
-const renderGridListButton = (isGridView, toggleViewFn) => {
-  const icon = isGridView ? (
-    <ListIcon style={{ fill: "white" }} />
-  ) : (
-    <GridIcon style={{ fill: "white" }} />
-  );
-  return (
-    <GridListButton>
-      <IconButton onClick={toggleViewFn}>{icon}</IconButton>
-    </GridListButton>
-  );
-};
-
-const renderWords = (isGridView, wordData) => {
-  return isGridView ? (
-    <WordGridView wordData={wordData} />
-  ) : (
-    <WordListView wordData={wordData} />
-  );
-};
-
-const getTabs = (selectedLevel, handleTab, levels) => {
-  return (
-    <TabsContainer>
-      <Paper>
-        <Tabs
-          value={selectedLevel}
-          onChange={handleTab}
-          indicatorColor="secondary"
-          textColor="text"
-          variant="scrollable"
-          scrollButtons="on"
-        >
-          {levels.map((item) => (
-            <Tab label={item.label} value={item.value} />
-          ))}
-        </Tabs>
-      </Paper>
-    </TabsContainer>
-  );
-};

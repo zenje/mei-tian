@@ -1,11 +1,12 @@
-import React from "react";
-import { Switch, Route } from "react-router-dom";
-import History from "components/History";
-import HSK2Grid from "components/HSK2Grid";
-import HSK3Grid from "components/HSK3Grid";
-import RandomWord from "components/RandomWord";
-import Word from "components/Word";
-import { useParams } from "react-router-dom";
+import React from 'react';
+
+import { Switch, Route, useParams } from 'react-router-dom';
+
+import History from 'components/History';
+import HSK2Grid from 'components/HSK2Grid';
+import HSK3Grid from 'components/HSK3Grid';
+import RandomWord from 'components/RandomWord';
+import Word from 'components/Word';
 
 export default function Routes() {
   return (
@@ -31,5 +32,5 @@ export default function Routes() {
 
 const WordWithParams = () => {
   const { word } = useParams();
-  return <Word word={word} isLoading={true} />;
+  return <Word word={word} isLoading />;
 };
