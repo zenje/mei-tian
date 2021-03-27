@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 
 import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
@@ -40,3 +41,15 @@ export default function WordGridView(props) {
     </div>
   );
 }
+
+WordGridView.propTypes = {
+  /**
+   * Array of words to display.
+   */
+  wordData: PropTypes.arrayOf(
+    PropTypes.shape({
+      simp: PropTypes.string.isRequired,
+      trad: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+};

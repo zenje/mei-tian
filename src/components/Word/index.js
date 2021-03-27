@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 
 import CardContent from '@material-ui/core/CardContent';
 import { useTheme } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
 
 import { ADD_TO_HISTORY } from 'actions';
 import { store } from 'store';
@@ -34,12 +35,12 @@ const getSentences = (
 ) => {
   const word = isSimplifiedMode ? simp : trad;
   if (!sentences || !sentences.length || !word) {
-    return;
+    return null;
   }
 
   return (
     <div>
-      {sentences.slice(0, 5).map((item, index) => (
+      {sentences.slice(0, 5).map((item) => (
         <Sentence
           accentColor={accentColor}
           chineseColor={chineseColor}
@@ -189,3 +190,33 @@ export default function Word(props) {
     </>
   );
 }
+
+Word.defaultProps = {
+  isLoading: true,
+  word: undefined,
+  wordDataProp: {},
+};
+
+Word.propTypes = {
+  /**
+   * True if word has not yet been loaded.
+   */
+  isLoading: PropTypes.bool,
+  /**
+   * String containing Chinese characters of word to fetch. If not provided, `wordData` should be passed in.
+   */
+  word: PropTypes.string,
+  /**
+   * Contains word data to display. If provided, this component will display this word data; otherwise, word data will be fetched from `word`.
+   */
+  wordDataProp: PropTypes.shape({
+    simp: PropTypes.string.isRequired,
+    trad: PropTypes.string.isRequired,
+    definition_entries: PropTypes.arrayOf(
+      PropTypes.shape({
+        pinyin: PropTypes.string.isRequired,
+        definitions: PropTypes.arrayOf(PropTypes.string),
+      })
+    ),
+  }),
+};

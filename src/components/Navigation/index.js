@@ -10,6 +10,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
+import PropTypes from 'prop-types';
 import { useHistory, useLocation } from 'react-router-dom';
 
 import SimplifiedToggle from 'components/SimplifiedToggle';
@@ -134,3 +135,11 @@ export default function Navigation(props) {
     </>
   );
 }
+
+Navigation.propTypes = {
+  content: PropTypes.element,
+};
+
+Navigation.defaultProps = {
+  content: <></>,
+};

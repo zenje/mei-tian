@@ -1,4 +1,5 @@
 import React, { createContext, useReducer } from 'react';
+import PropTypes from 'prop-types';
 
 import { ADD_TO_HISTORY, CLEAR_HISTORY, TOGGLE_SIMPLIFIED_MODE } from 'actions';
 
@@ -35,6 +36,13 @@ const StateProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   // Provider's value to be passed to consuming components that are descendants of this Provider
   return <Provider value={{ state, dispatch }}>{children}</Provider>;
+};
+
+StateProvider.propTypes = {
+  /**
+   * Child elements to be wrapped by the StateProvider that will receive access to `state`, `dispatch`.
+   */
+  children: PropTypes.element.isRequired,
 };
 
 export { store, StateProvider };

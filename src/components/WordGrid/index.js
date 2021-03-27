@@ -6,6 +6,7 @@ import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
 import ListIcon from '@material-ui/icons/ListRounded';
 import GridIcon from '@material-ui/icons/ViewModuleRounded';
+import PropTypes from 'prop-types';
 
 import WordGridView from 'components/WordGridView';
 import WordListView from 'components/WordListView';
@@ -56,7 +57,9 @@ export default function WordGrid(props) {
 
   const [isLoading, setIsLoading] = useState(true);
   const [wordData, setWordData] = useState(null);
-  const [selectedLevel, setSelectedLevel] = useState(props.selectedLevel);
+  const [selectedLevel, setSelectedLevel] = useState(
+    props.selectedLevel ? props.selectedLevel : levels[0].value
+  );
   const [isGridView, setIsGridView] = useState(true);
 
   const handleTab = (event, level) => {
@@ -93,3 +96,31 @@ export default function WordGrid(props) {
     </>
   );
 }
+
+WordGrid.defaultProps = {
+  selectedLevel: '',
+};
+
+WordGrid.propTypes = {
+  /**
+   * The API endpoint for fetching word grid info.
+   */
+  endpoint: PropTypes.string.isRequired,
+  /**
+   * An array containing the levels available for this word grid; will be displayed as selectable tabs.
+   */
+  levels: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string.isRequired,
+      value: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  /**
+   * Value of the currently selected level.
+   */
+  selectedLevel: PropTypes.string,
+  /**
+   * The title of this page.
+   */
+  title: PropTypes.string.isRequired,
+};
