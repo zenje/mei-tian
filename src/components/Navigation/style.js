@@ -48,9 +48,16 @@ export const StyledInput = styled(InputBase)`
   }
 `;
 
-export const SimplifiedToggleButton = styled.div`
+export const ToggleButtonWrapper = styled.div`
+  display: flex;
   // flex approach to floating button to right of app-bar
   margin-left: auto;
+`;
+
+export const SimplifiedToggleWrapper = styled.div`
+  button.MuiButton-textSizeLarge {
+    padding: 8px 0;
+  }
 `;
 
 export const MenuButtonWrapper = styled.div`

@@ -1,9 +1,16 @@
 import React, { createContext, useReducer } from 'react';
+
 import PropTypes from 'prop-types';
 
-import { ADD_TO_HISTORY, CLEAR_HISTORY, TOGGLE_SIMPLIFIED_MODE } from 'actions';
+import {
+  ADD_TO_HISTORY,
+  CLEAR_HISTORY,
+  TOGGLE_THEME,
+  TOGGLE_SIMPLIFIED_MODE,
+} from 'actions';
 
 const initialState = {
+  isLightMode: false,
   isSimplifiedMode: true,
   history: [],
 };
@@ -12,6 +19,11 @@ const { Provider } = store;
 
 const reducer = (state, action) => {
   switch (action.type) {
+    case TOGGLE_THEME:
+      return {
+        ...state,
+        isLightMode: !state.isLightMode,
+      };
     case TOGGLE_SIMPLIFIED_MODE:
       return {
         ...state,
@@ -40,7 +52,8 @@ const StateProvider = ({ children }) => {
 
 StateProvider.propTypes = {
   /**
-   * Child elements to be wrapped by the StateProvider that will receive access to `state`, `dispatch`.
+   * Child elements to be wrapped by the StateProvider that
+   * will receive access to `state`, `dispatch`.
    */
   children: PropTypes.element.isRequired,
 };

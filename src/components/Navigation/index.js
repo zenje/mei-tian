@@ -14,6 +14,7 @@ import PropTypes from 'prop-types';
 import { useHistory, useLocation } from 'react-router-dom';
 
 import SimplifiedToggle from 'components/SimplifiedToggle';
+import ThemeToggle from 'components/ThemeToggle';
 
 import { NAVIGATION_LINKS, TITLE } from '../../constants';
 import {
@@ -25,7 +26,8 @@ import {
   ListIcon,
   MenuButtonWrapper,
   Title,
-  SimplifiedToggleButton,
+  ToggleButtonWrapper,
+  SimplifiedToggleWrapper,
   StyledLink as Link,
   StyledSearchBar,
   StyledSearchIcon,
@@ -86,9 +88,12 @@ export default function Navigation(props) {
               }}
             />
           </StyledSearchBar>
-          <SimplifiedToggleButton>
-            <SimplifiedToggle />
-          </SimplifiedToggleButton>
+          <ToggleButtonWrapper>
+            <ThemeToggle />
+            <SimplifiedToggleWrapper>
+              <SimplifiedToggle />
+            </SimplifiedToggleWrapper>
+          </ToggleButtonWrapper>
         </Toolbar>
       </AppBar>
       <DrawerWrapper>

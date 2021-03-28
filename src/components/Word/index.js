@@ -203,11 +203,14 @@ Word.propTypes = {
    */
   isLoading: PropTypes.bool,
   /**
-   * String containing Chinese characters of word to fetch. If not provided, `wordData` should be passed in.
+   * String containing Chinese characters of word to fetch.
+   * If not provided, `wordData` should be passed in.
    */
   word: PropTypes.string,
   /**
-   * Contains word data to display. If provided, this component will display this word data; otherwise, word data will be fetched from `word`.
+   * Contains word data to display. If provided, this component
+   * will display this word data; otherwise, word data will be
+   * fetched from `word`.
    */
   wordDataProp: PropTypes.shape({
     simp: PropTypes.string.isRequired,

@@ -107,7 +107,8 @@ WordGrid.propTypes = {
    */
   endpoint: PropTypes.string.isRequired,
   /**
-   * An array containing the levels available for this word grid; will be displayed as selectable tabs.
+   * An array containing the levels available for this word
+   * grid; will be displayed as selectable tabs.
    */
   levels: PropTypes.arrayOf(
     PropTypes.shape({

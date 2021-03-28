@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 import { TOGGLE_SIMPLIFIED_MODE } from 'actions';
 import { store } from 'store';
 
-import { Wrapper } from './style';
+import { Character, Wrapper } from './style';
 
 export default function SimplifiedToggle() {
   const context = useContext(store);
@@ -17,7 +17,7 @@ export default function SimplifiedToggle() {
   return (
     <Wrapper>
       <Button color="inherit" size="large" onClick={toggle}>
-        {char}
+        <Character>{char}</Character>
       </Button>
     </Wrapper>
   );
