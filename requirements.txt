@@ -3,9 +3,11 @@ chinese-english-lookup==0.0.3
 Flask==1.1.2
 flask-marshmallow==0.14.0
 Flask-Script==2.0.6
+Flask-Session==0.3.2
 Flask-SQLAlchemy==2.4.4
 gunicorn==20.0.4
 marshmallow==3.10.0
 OpenCC==1.1.2
+redis==3.5.3
 requests==2.25.1
 xpinyin==0.7.6
