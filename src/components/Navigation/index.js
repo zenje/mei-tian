@@ -114,10 +114,10 @@ export default function Navigation(props) {
               {NAVIGATION_LINKS.map((item) => (
                 <Link to={item.link}>
                   <ListItem
-                    button
                     onClick={handleDrawerClose}
                     key={item.label}
                     selected={item.link === path}
+                    disableGutters
                   >
                     <ListItemText
                       primary={

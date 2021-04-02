@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Switch, Route, useParams } from 'react-router-dom';
 
+import FlashcardsView from 'components/FlashcardsView';
 import History from 'components/History';
 import HSK2Grid from 'components/HSK2Grid';
 import HSK3Grid from 'components/HSK3Grid';
@@ -22,6 +23,9 @@ export default function Routes() {
       </Route>
       <Route path="/history">
         <History />
+      </Route>
+      <Route path="/flashcards">
+        <FlashcardsView />
       </Route>
       <Route path="/word/:word">
         <WordWithParams />

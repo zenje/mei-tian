@@ -28,29 +28,27 @@ const DARK_PALETTE = {
 };
 
 const OVERRIDES = {
+  /* navigation menu styling */
   MuiListItem: {
     root: {
       '&$selected, &$selected:hover': {
         backgroundColor: 'inherit',
-        fontWeight: 'bold',
         color: BASE_PALETTE.secondary.main,
       },
     },
-    gutters: {
-      paddingLeft: '0px',
-    },
     selected: {
       '& div.MuiListItemText-root': {
-        paddingLeft: 'calc(1.2rem - 4px)', // subtract border width
-        borderLeft: `4px solid ${BASE_PALETTE.secondary.main}`,
+        paddingLeft: '1rem', // subtract border width
+        borderLeft: `0.25rem solid ${BASE_PALETTE.secondary.main}`,
       },
     },
   },
   MuiListItemText: {
     root: {
-      paddingLeft: '1.2rem',
+      paddingLeft: '1.25rem',
     },
   },
+  /* HSK view tab styling */
   MuiTab: {
     selected: {
       color: BASE_PALETTE.secondary.main,
@@ -64,6 +62,30 @@ const OVERRIDES = {
   MuiTouchRipple: {
     child: {
       backgroundColor: BASE_PALETTE.secondary.light,
+    },
+  },
+  /* form styling */
+  MuiFormControl: {
+    root: {
+      margin: '0.5rem',
+      minWidth: '12rem',
+    },
+  },
+  MuiSelect: {
+    root: {
+      width: '12rem',
+    },
+    select: {
+      textAlign: 'left',
+      padding: '0.5rem 1rem',
+    },
+    selectMenu: {
+      whiteSpace: 'normal',
+    },
+  },
+  MuiChip: {
+    root: {
+      margin: '0.25rem',
     },
   },
 };
