@@ -47,7 +47,7 @@ export default function RandomWord() {
           color="text"
         />
       </h2>
-      <Word wordDataProp={wordData} isLoading={isLoading} />
+      <Word wordData={wordData} isLoading={isLoading} />
     </>
   );
 }

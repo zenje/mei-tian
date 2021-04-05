@@ -1,7 +1,7 @@
 import Card from '@material-ui/core/Card';
 import styled from 'styled-components';
 
-export const WordCard = styled(Card)`
+export const StyledCard = styled(Card)`
   width: 100%;
   max-width: 25rem;
   margin: 1rem;
