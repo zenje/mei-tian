@@ -133,13 +133,18 @@ def fetch_hsk3_endpoint(category):
     return json.dumps(fetch_hsk3(category), default=lambda o: o.__dict__)
 
 
-@words.route("/api/flashcards/<hsk>/<level>/<number>")
-def fetch_flashcards(hsk, level, number=100):
+@words.route("/api/flashcards")
+def fetch_flashcards():
+    hsk = request.args.get("hsk")
+    levels = request.args.getlist("level")
+    number = request.args.get("number")
+
     word_list = []
-    if hsk == "hsk2":
-        word_list = fetch_hsk2(int(level))
-    else:
-        word_list = fetch_hsk3(level)
+    for level in levels:
+        if hsk == "hsk2":
+            word_list += fetch_hsk2(int(level))
+        else:
+            word_list += fetch_hsk3(level)
 
     random_subset = sample(word_list, int(number))
     print(len(random_subset))
@@ -152,7 +157,7 @@ def fetch_flashcards(hsk, level, number=100):
 
 @words.route("/api/get_flashcards")
 def fetch_flashcards_session():
-    flashcards = session["flashcards"]
+    flashcards = session.get("flashcards")
     if flashcards is None:
         return """
         <div>

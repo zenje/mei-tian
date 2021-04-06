@@ -3,11 +3,11 @@ import React from 'react';
 import Checkbox from '@material-ui/core/Checkbox';
 import Chip from '@material-ui/core/Chip';
 import FormControl from '@material-ui/core/FormControl';
+import FormHelperText from '@material-ui/core/FormHelperText';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
-import DownArrow from '@material-ui/icons/ExpandMoreRounded';
 import PropTypes from 'prop-types';
 
 const CustomSelect = (props) => {
@@ -89,9 +89,14 @@ const renderEmptyOption = () => (
   </MenuItem>
 );
 
+const renderErrorMessage = (error, errorMessage) =>
+  error && errorMessage && <FormHelperText>{errorMessage}</FormHelperText>;
+
 export default function DropdownMenu(props) {
   const {
     allowMultipleSelect,
+    error,
+    errorMessage,
     label,
     id,
     onChange,
@@ -122,7 +127,7 @@ export default function DropdownMenu(props) {
 
   return (
     <div>
-      <FormControl>
+      <FormControl error={error}>
         <InputLabel>{label}</InputLabel>
         <CustomSelect
           allowMultipleSelect={allowMultipleSelect}
@@ -142,6 +147,7 @@ export default function DropdownMenu(props) {
             </MenuItem>
           ))}
         </CustomSelect>
+        {renderErrorMessage(error, errorMessage)}
       </FormControl>
     </div>
   );
@@ -149,24 +155,34 @@ export default function DropdownMenu(props) {
 
 DropdownMenu.defaultProps = {
   allowMultipleSelect: false,
+  error: false,
+  errorMessage: '',
   onChange: () => {},
 };
 
 DropdownMenu.propTypes = {
-  /*
+  /**
    * If `true`, dropdown will allow for multiple selections.
    */
   allowMultipleSelect: PropTypes.bool,
+  /**
+   * If `true`, display dropdown in an error state.
+   */
+  error: PropTypes.bool,
+  /**
+   * Error message to display if `error` is `true`.
+   */
+  errorMessage: PropTypes.string,
   id: PropTypes.string.isRequired,
-  /*
+  /**
    * The displayed label of the dropdown.
    */
   label: PropTypes.string.isRequired,
-  /*
+  /**
    * An optional function to call on changing the selected value(s).
    */
   onChange: PropTypes.func,
-  /*
+  /**
    * An array of label-value options for selection.
    */
   options: PropTypes.arrayOf(
@@ -175,13 +191,13 @@ DropdownMenu.propTypes = {
       value: PropTypes.string.isRequired,
     })
   ).isRequired,
-  /*
+  /**
    * The currently selected value(s), passed in from parent component.
    * If `allowMultipleSelect` is `true`, `selectedValue` should be
    * an array.
    */
   selected: PropTypes.string.isRequired,
-  /*
+  /**
    * Function that sets `selected`, passed in from parent component.
    */
   setSelected: PropTypes.func.isRequired,

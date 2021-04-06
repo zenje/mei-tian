@@ -13,7 +13,7 @@ def get_hsk2():
     if "hsk2" not in g:
         g.hsk2 = HSK2(get_dictionary())
 
-        return g.hsk2
+    return g.hsk2
 
 
 def get_hsk3():
