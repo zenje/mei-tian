@@ -15,11 +15,11 @@ export const Word = styled.div`
   .word {
     width: 100%;
     font-size: 2rem;
-    color: ${(props) => props.color};
+    color: ${(props) => props.theme.palette.primary.light};
     text-align: center;
   }
   b {
-    color: ${(props) => props.accentColor};
+    color: ${(props) => props.theme.palette.primary.main};
   }
   .definition {
     width: 100%;

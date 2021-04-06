@@ -19,16 +19,7 @@ const boldWordInSentence = (sentence, word) => {
 };
 
 export default function Sentences(props) {
-  const {
-    accentColor,
-    chineseColor,
-    englishColor,
-    isSimplifiedMode,
-    pinyinColor,
-    simplified,
-    traditional,
-    sentences,
-  } = props;
+  const { isSimplifiedMode, simplified, traditional, sentences } = props;
   if (!sentences || !sentences.length) {
     return null;
   }
@@ -38,12 +29,7 @@ export default function Sentences(props) {
   return (
     <div>
       {sentences.slice(0, 5).map((sentence) => (
-        <Sentence
-          accentColor={accentColor}
-          chineseColor={chineseColor}
-          englishColor={englishColor}
-          pinyinColor={pinyinColor}
-        >
+        <Sentence>
           <span className="english">{sentence.english}</span>
           <br />
           {boldWordInSentence(
@@ -59,11 +45,7 @@ export default function Sentences(props) {
 }
 
 Sentences.defaultProps = {
-  accentColor: '',
-  chineseColor: '',
-  englishColor: '',
   isSimplifiedMode: true,
-  pinyinColor: '',
   sentences: [],
   simplified: '',
   traditional: '',
@@ -71,25 +53,9 @@ Sentences.defaultProps = {
 
 Sentences.propTypes = {
   /**
-   * Font color of word bolded in sentence.
-   */
-  accentColor: PropTypes.string,
-  /**
-   * Font color of sentence in Chinese. (Not currently used.)
-   */
-  chineseColor: PropTypes.string,
-  /**
-   * Font color of sentence in English.
-   */
-  englishColor: PropTypes.string,
-  /**
    * `True` if app is in simplified Chinese text mode.
    */
   isSimplifiedMode: PropTypes.bool,
-  /**
-   * Font color of pinyin sentence.
-   */
-  pinyinColor: PropTypes.string,
   /**
    * An array of sample sentences to display.
    */

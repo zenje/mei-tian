@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { MuiThemeProvider } from '@material-ui/core/styles';
+import { MuiThemeProvider, StylesProvider } from '@material-ui/core/styles';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
 
 import Navigation from 'components/Navigation';
 import Routes from 'components/Routes';
@@ -24,16 +25,21 @@ const WrappedApp = () => {
   const context = useContext(store);
   const { state } = context;
   const { isLightMode } = state;
+  const theme = getTheme(isLightMode);
 
   return (
-    <MuiThemeProvider theme={getTheme(isLightMode)}>
-      <Container>
-        <Router>
-          <CssBaseline />
-          <Navigation content={<Content />} />
-        </Router>
-      </Container>
-    </MuiThemeProvider>
+    <StylesProvider injectFirst>
+      <MuiThemeProvider theme={theme}>
+        <ThemeProvider theme={theme}>
+          <Container>
+            <Router>
+              <CssBaseline />
+              <Navigation content={<Content />} />
+            </Router>
+          </Container>
+        </ThemeProvider>
+      </MuiThemeProvider>
+    </StylesProvider>
   );
 };
 

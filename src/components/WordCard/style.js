@@ -18,15 +18,15 @@ export const StyledCard = styled(Card)`
 `;
 
 export const WordTitle = styled.h1`
-  color: ${(props) => props.color};
+  color: ${(props) => props.theme.palette.primary.light};
 `;
 
 export const Definition = styled.div`
   b {
-    color: ${(props) => props.accentColor};
+    color: ${(props) => props.theme.palette.primary.main};
   }
 `;
 
 export const HskInfo = styled.div`
-  color: ${(props) => props.color};
+  color: ${(props) => props.theme.palette.text.secondary};
 `;

@@ -1,17 +1,14 @@
 import styled from 'styled-components';
 
 const Sentence = styled.p`
-  .chinese {
-    //color: ${(props) => props.chineseColor};
-  }
   .english {
-    color: ${(props) => props.englishColor};
+    color: ${(props) => props.theme.palette.text.secondary};
   }
   .pinyin {
-    color: ${(props) => props.pinyinColor};
+    color: ${(props) => props.theme.palette.text.secondary};
   }
   b {
-    color: ${(props) => props.accentColor};
+    color: ${(props) => props.theme.palette.secondary.light};
   }
 `;
 

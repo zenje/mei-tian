@@ -5,19 +5,17 @@ import PropTypes from 'prop-types';
 
 import { Definition, HskInfo, StyledCard as Card, WordTitle } from './style';
 
-const formatDefinitions = (entries, accentColor) => (
+const formatDefinitions = (entries) => (
   <div>
     {entries.map((entry) => (
-      <Definition accentColor={accentColor}>
+      <Definition>
         <b>[{entry.pinyin}]</b> {entry.definitions.join(', ')}
       </Definition>
     ))}
   </div>
 );
 
-const renderWordTitle = (word, color) => (
-  <WordTitle color={color}>{word}</WordTitle>
-);
+const renderWordTitle = (word) => <WordTitle>{word}</WordTitle>;
 
 // compares characters of `word1` and `word2`, displaying `word1` characters
 // if different; otherwise, displays a '-' for characters that are the same
@@ -33,7 +31,7 @@ const getCharDifference = (word1, word2) => {
   return result;
 };
 
-const renderWord = (wordData, isSimplifiedMode, color) => {
+const renderWord = (wordData, isSimplifiedMode) => {
   const { simp, trad } = wordData;
   let displayedWord;
   if (simp === trad) {
@@ -45,11 +43,11 @@ const renderWord = (wordData, isSimplifiedMode, color) => {
     const charDifference = getCharDifference(simp, trad);
     displayedWord = `${trad} [ ${charDifference} ]`;
   }
-  return renderWordTitle(displayedWord, color);
+  return renderWordTitle(displayedWord);
 };
 
-const renderHskInfo = (wordData, color) => (
-  <HskInfo color={color}>
+const renderHskInfo = (wordData) => (
+  <HskInfo>
     {wordData.hsk2 && (
       <div>
         <small>
@@ -69,21 +67,13 @@ const renderHskInfo = (wordData, color) => (
 );
 
 export default function WordCard(props) {
-  const {
-    accentColor,
-    hskColor,
-    isLoading,
-    isSimplifiedMode,
-    word,
-    wordColor,
-    wordData,
-  } = props;
+  const { isLoading, isSimplifiedMode, word, wordData } = props;
 
   if (isLoading || !wordData) {
     return (
       <Card>
         <CardContent>
-          {word && renderWordTitle(word, wordColor)}
+          {word && renderWordTitle(word)}
           <div>...loading</div>
         </CardContent>
       </Card>
@@ -93,34 +83,23 @@ export default function WordCard(props) {
   return (
     <Card>
       <CardContent>
-        {renderWord(wordData, isSimplifiedMode, wordColor)}
-        {formatDefinitions(wordData.definition_entries, accentColor)}
+        {renderWord(wordData, isSimplifiedMode)}
+        {formatDefinitions(wordData.definition_entries)}
         <br />
-        {renderHskInfo(wordData, hskColor)}
+        {renderHskInfo(wordData)}
       </CardContent>
     </Card>
   );
 }
 
 WordCard.defaultProps = {
-  accentColor: '',
-  hskColor: '',
   isLoading: true,
   isSimplifiedMode: true,
   word: '',
-  wordColor: '',
   wordData: {},
 };
 
 WordCard.propTypes = {
-  /**
-   * Font color of pinyin in definitions.
-   */
-  accentColor: PropTypes.string,
-  /**
-   * Font color of HSK tags.
-   */
-  hskColor: PropTypes.string,
   /**
    * `True` if word has not yet been loaded.
    */
@@ -133,10 +112,6 @@ WordCard.propTypes = {
    * Title word to display.
    */
   word: PropTypes.string,
-  /**
-   * Font color of title word.
-   */
-  wordColor: PropTypes.string,
   /**
    * Contains word data of word to display.
    */

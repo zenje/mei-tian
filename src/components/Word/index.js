@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 
-import { useTheme } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 
 import { ADD_TO_HISTORY } from 'actions';
@@ -12,8 +11,6 @@ export default function Word(props) {
   const { word } = props;
   const [isLoading, setIsLoading] = useState(props.isLoading);
   const [wordData, setWordData] = useState(props.wordData);
-  const theme = useTheme();
-  const { primary, secondary, text } = theme.palette;
 
   const context = useContext(store);
   const { state, dispatch } = context;
@@ -41,12 +38,9 @@ export default function Word(props) {
   return (
     <>
       <WordCard
-        accentColor={primary.main}
-        hskColor={text.secondary}
         isLoading={isLoading}
         isSimplifiedMode={isSimplifiedMode}
         word={word}
-        wordColor={primary.light}
         wordData={wordData}
       />
       <Sentences
@@ -54,10 +48,6 @@ export default function Word(props) {
         traditional={wordData.trad}
         sentences={wordData.sentences}
         isSimplifiedMode={isSimplifiedMode}
-        accentColor={secondary.light}
-        chineseColor={primary.main}
-        englishColor={text.secondary}
-        pinyinColor={text.secondary}
       />
     </>
   );

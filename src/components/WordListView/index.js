@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 
 import CardContent from '@material-ui/core/CardContent';
-import { useTheme } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 
 import { store } from 'store';
@@ -18,13 +17,13 @@ const formatDefinitions = (entries) => (
   </div>
 );
 
-const renderWordCard = (word, isSimplifiedMode, primary) => {
+const renderWordCard = (word, isSimplifiedMode) => {
   const displayedWord = isSimplifiedMode ? word.simp : word.trad;
   return (
     <Link to={`/word/${displayedWord}`}>
       <WordCard>
         <CardContent>
-          <Word color={primary.light} accentColor={primary.main}>
+          <Word>
             <div className="word">{displayedWord}</div>
             {formatDefinitions(word.definition_entries)}
           </Word>
@@ -36,17 +35,13 @@ const renderWordCard = (word, isSimplifiedMode, primary) => {
 
 export default function WordListView(props) {
   const { wordData } = props;
-  const theme = useTheme();
-  const { primary } = theme.palette;
 
   const context = useContext(store);
   const { state } = context;
   const { isSimplifiedMode } = state;
 
   return (
-    <div>
-      {wordData.map((word) => renderWordCard(word, isSimplifiedMode, primary))}
-    </div>
+    <div>{wordData.map((word) => renderWordCard(word, isSimplifiedMode))}</div>
   );
 }
 
