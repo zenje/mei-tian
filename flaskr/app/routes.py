@@ -159,11 +159,7 @@ def fetch_flashcards():
 def fetch_flashcards_session():
     flashcards = session.get("flashcards")
     if flashcards is None:
-        return """
-        <div>
-            No flashcards.
-        </div>
-        """
+        flashcards = []
 
     return json.dumps(flashcards, default=lambda o: o.__dict__)
 
